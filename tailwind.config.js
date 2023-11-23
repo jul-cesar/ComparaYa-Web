@@ -11,9 +11,10 @@ export default {
         'mobile':  'repeat(auto-fit, minmax(150px, 1fr))',
       },
       colors: {
-        'wip': '#F9FAFB',
+        'wip': '#ffffff',
         'black-white': '#fdfdff',
         'wcom': '#F1F3F5',
+        'input': '#f4f6f8'
       },
       
     },

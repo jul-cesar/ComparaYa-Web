@@ -1,13 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Products } from "../context/productsContext";
+import { useDebounce } from "../hooks/useDebounce";
+import { getAllProductos } from "../api/productsFetching";
 
 const InputSearch = () => {
-  const { AllProducts, setFilteredItems, products } = useContext(Products);
+  const {
+    AllProducts,
+    setFilteredItems,
+    products,
+    setAllProducts,
+    setIsSearching,
+  } = useContext(Products);
   const [query, setQuery] = useState("");
+  const debouncedSearch = useDebounce(query);
 
   if (query === "") {
     setFilteredItems(products);
+    setIsSearching(false);
   }
+  useEffect(() => {
+    getAllProductos(setAllProducts);
+    console.log("traje todos los productos");
+  }, []);
 
   useEffect(() => {
     const filtered = AllProducts.filter((p) =>
@@ -16,18 +30,19 @@ const InputSearch = () => {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .includes(query.toLowerCase())
+        .includes(debouncedSearch.toLowerCase())
     );
-    setFilteredItems(filtered)
-  }, [query]);
+    setIsSearching(true);
+    setFilteredItems(filtered);
+  }, [debouncedSearch]);
 
   return (
-    <div className="flex w-[30rem] rounded bg-black-white shadow-md">
+    <div className="hidden md:flex w-[22rem] rounded bg-input shadow-md">
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         type="search"
-        className="w-full border-none bg-transparent px-4 py-1 text-gray-900 focus:outline-none"
+        className="w-full border-none bg-transparent px-3 py-1 text-gray-900 focus:outline-none"
         placeholder="search"
       />
       <button className="m-2 rounded px-4 py-2 font-semibold text-gray-100 bg-slate-500">

@@ -7,7 +7,7 @@ export const getProductos = async (
   setLoadingProducts(true);
   try {
     const response = await fetch(
-      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/${currentPage}/32`
+      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/${currentPage}/16`
     );
     const fetchedProducts = await response.json();
     setProducts((PrevProducts) => PrevProducts.concat(fetchedProducts));

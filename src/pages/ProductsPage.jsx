@@ -16,25 +16,22 @@ const ProductsPage = () => {
     loadingProducts,
     setLoadingProducts,
     filteredItems,
-    setAllProducts,
+    products,
+    isSearching
   } = useContext(Products);
 
   useEffect(() => {
     getProductos(setProducts, setLoadingProducts, currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    getAllProductos(setAllProducts);
-  }, []);
-
   return (
     <div className="flex flex-col justify-between min-h-screen bg-wip">
       <div>
         <Navbar />
-        <div className="p-20">
-          <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
+        <div className="p-24">
+          {/* <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
             Productos
-          </h1>
+          </h1> */}
 
           <ul className="grid grid-cols-16 gap-10 content-center">
             {filteredItems.map((product, index) => {
@@ -53,11 +50,13 @@ const ProductsPage = () => {
 
           {!loadingProducts ? (
             <div className="flex items-center justify-center">
-              <PaginationButton
-                click={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              />
+              { !isSearching && (
+                <PaginationButton
+                  click={() => {
+                    setCurrentPage(currentPage + 1);
+                  }}
+                />
+              )}
             </div>
           ) : (
             <div className="flex items-center justify-center">
