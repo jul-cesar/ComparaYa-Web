@@ -2,6 +2,7 @@ import React from "react";
 import InputSearch from "./InputSearch";
 import logo from "../media/icon-512.png";
 import textlogo from "../media/textlogo.png";
+import BackTopButton from "./backTopButton";
 
 function Navbar() {
   return (
@@ -9,16 +10,15 @@ function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center justify-center ">
           {" "}
-       
           <img
             src={logo}
             alt="Company Logo"
-            className="h-16 w-20 sm:h-16 md:h-20 lg:h-20 object-cover" 
+            className="h-16 w-20 sm:h-16 md:h-20 lg:h-20 object-cover"
           />
           <img
             src={textlogo}
             alt="Company Text Logo"
-            className="h-10 w-44 sm:h-10 md:h-12 lg:h-12 object-cover" 
+            className="h-10 w-44 sm:h-10 md:h-12 lg:h-12 object-cover"
           />
         </div>
 

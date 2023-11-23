@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { Products } from "../context/productsContext";
 import { useDebounce } from "../hooks/useDebounce";
 import { getAllProductos } from "../api/productsFetching";
+import { ScrollToTop } from "../utils/scrollTop";
 
 const InputSearch = () => {
   const {
@@ -14,16 +15,13 @@ const InputSearch = () => {
   const [query, setQuery] = useState("");
   const debouncedSearch = useDebounce(query);
 
-  if (query === "") {
-    setFilteredItems(products);
-    setIsSearching(false);
-  }
+  // Fetch all products only once when the component mounts
   useEffect(() => {
     getAllProductos(setAllProducts);
-    console.log("traje todos los productos");
-  }, []);
+  }, [setAllProducts]);
 
-  useEffect(() => {
+  // Callback for filtering products
+  const filterProducts = useCallback(() => {
     const filtered = AllProducts.filter((p) =>
       p.nombre
         .toString()
@@ -32,9 +30,25 @@ const InputSearch = () => {
         .replace(/[\u0300-\u036f]/g, "")
         .includes(debouncedSearch.toLowerCase())
     );
-    setIsSearching(true);
+    ScrollToTop();
     setFilteredItems(filtered);
-  }, [debouncedSearch]);
+    setIsSearching(true);
+  }, [AllProducts, debouncedSearch, setFilteredItems, setIsSearching]);
+
+  // Effect for handling debounced search
+  useEffect(() => {
+    if (debouncedSearch !== "") {
+      filterProducts();
+    }
+  }, [debouncedSearch, filterProducts]);
+
+  // Effect for resetting when query is cleared
+  useEffect(() => {
+    if (query === "") {
+      setFilteredItems(products);
+      setIsSearching(false);
+    }
+  }, [query, products, setFilteredItems, setIsSearching]);
 
   return (
     <div className="hidden md:flex w-[22rem] rounded bg-input shadow-md">

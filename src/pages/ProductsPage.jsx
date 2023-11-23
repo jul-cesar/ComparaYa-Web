@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Products } from "../context/productsContext";
-import { getAllProductos, getProductos } from "../api/productsFetching";
+import { getProductos } from "../api/productsFetching";
 import CardProduct from "../components/CardProduct";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -8,30 +8,47 @@ import Lottie from "lottie-react";
 import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
+import BackTopButton from "../components/backTopButton";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAtTop, setIsAtTop] = useState(true);
+
   const {
     setProducts,
     loadingProducts,
     setLoadingProducts,
     filteredItems,
-    products,
-    isSearching
+    isSearching,
   } = useContext(Products);
 
   useEffect(() => {
     getProductos(setProducts, setLoadingProducts, currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY === 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="flex flex-col justify-between min-h-screen bg-wip">
       <div>
         <Navbar />
+
         <div className="p-24">
           {/* <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
             Productos
           </h1> */}
+          <div className="fixed bottom-10 left-10 z-50">
+            {" "}
+            {!isAtTop && <BackTopButton />}
+          </div>
 
           <ul className="grid grid-cols-16 gap-10 content-center">
             {filteredItems.map((product, index) => {
@@ -50,7 +67,7 @@ const ProductsPage = () => {
 
           {!loadingProducts ? (
             <div className="flex items-center justify-center">
-              { !isSearching && (
+              {!isSearching && (
                 <PaginationButton
                   click={() => {
                     setCurrentPage(currentPage + 1);
