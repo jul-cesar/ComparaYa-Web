@@ -9,6 +9,7 @@ import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
 import BackTopButton from "../components/backTopButton";
+import CategoriesSidebar from "../components/categoriesSidebar";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,45 +42,49 @@ const ProductsPage = () => {
       <div>
         <Navbar />
 
-        <div className="p-24">
-          {/* <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
+        <div className="flex">
+          <CategoriesSidebar />
+
+          <div className="p-24 flex-grow">
+            {/* <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
             Productos
           </h1> */}
-          <div className="fixed bottom-10 left-10 z-50">
-            {" "}
-            {!isAtTop && <BackTopButton />}
+            <div className="fixed bottom-10 left-10 z-50">
+              {" "}
+              {!isAtTop && <BackTopButton />}
+            </div>
+
+            <ul className="grid grid-cols-16 gap-10 content-center">
+              {filteredItems.map((product, index) => {
+                return (
+                  <CardProduct
+                    key={nanoid()}
+                    img={product.imagen_url}
+                    nombre={product.nombre}
+                    precio_exito={product.precio_exito}
+                    precio_olim={product.precio_olim}
+                    precio_d1={product.precio_d1}
+                  />
+                );
+              })}
+            </ul>
+
+            {!loadingProducts ? (
+              <div className="flex items-center justify-center">
+                {!isSearching && (
+                  <PaginationButton
+                    click={() => {
+                      setCurrentPage(currentPage + 1);
+                    }}
+                  />
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center">
+                <Lottie animationData={load} className="w-32 h-32 mt-20 " />
+              </div>
+            )}
           </div>
-
-          <ul className="grid grid-cols-16 gap-10 content-center">
-            {filteredItems.map((product, index) => {
-              return (
-                <CardProduct
-                  key={nanoid()}
-                  img={product.imagen_url}
-                  nombre={product.nombre}
-                  precio_exito={product.precio_exito}
-                  precio_olim={product.precio_olim}
-                  precio_d1={product.precio_d1}
-                />
-              );
-            })}
-          </ul>
-
-          {!loadingProducts ? (
-            <div className="flex items-center justify-center">
-              {!isSearching && (
-                <PaginationButton
-                  click={() => {
-                    setCurrentPage(currentPage + 1);
-                  }}
-                />
-              )}
-            </div>
-          ) : (
-            <div className="flex items-center justify-center">
-              <Lottie animationData={load} className="w-32 h-32 mt-20 " />
-            </div>
-          )}
         </div>
       </div>
       {!loadingProducts && <Footer />}

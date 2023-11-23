@@ -2,7 +2,6 @@ import React from "react";
 import InputSearch from "./InputSearch";
 import logo from "../media/icon-512.png";
 import textlogo from "../media/textlogo.png";
-import BackTopButton from "./backTopButton";
 
 function Navbar() {
   return (
