@@ -5,19 +5,19 @@ import textlogo from "../media/textlogo.png";
 
 function Navbar() {
   return (
-    <nav className="bg-wip p-1 shadow-md fixed top-0 left-0 right-0 z-10">
+    <nav className="bg-wip p-3 shadow-md fixed top-0 left-0 right-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center justify-center ">
           {" "}
           <img
             src={logo}
             alt="Company Logo"
-            className="h-16 w-20 sm:h-16 md:h-20 lg:h-20 object-cover"
+            className="max-h-14 w-20 sm:h-16 md:h-20 lg:h-20 object-cover"
           />
           <img
             src={textlogo}
             alt="Company Text Logo"
-            className="h-10 w-44 sm:h-10 md:h-12 lg:h-12 object-cover"
+            className="h-12 w-60 sm:h-13.5 md:h-13 lg:h-13 object-cover"
           />
         </div>
 

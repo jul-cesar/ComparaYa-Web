@@ -9,15 +9,18 @@ import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
 import BackTopButton from "../components/backTopButton";
-import CategoriesSidebar from "../components/CategoriesSidebar";
+import CategoriesSidebar from "../components/categoriesSidebar";
+import InfoHeader from "../components/infoHeader";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [currentCategory, setCurrentCategory] = useState();
 
   const {
     setProducts,
     loadingProducts,
+    AllProducts,
     setLoadingProducts,
     filteredItems,
     isSearching,
@@ -43,17 +46,19 @@ const ProductsPage = () => {
         <Navbar />
 
         <div className="flex">
-          <CategoriesSidebar />
+          <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
 
           <div className="p-24 flex-grow">
-            {/* <h1 className="text-center font-bold text-black text-3xl mt-10 mb-10">
-            Productos
-          </h1> */}
-            <div className="fixed bottom-10 left-10 z-50">
+            <div className="fixed bottom-5 left-10 z-50">
               {" "}
               {!isAtTop && <BackTopButton />}
             </div>
 
+            <InfoHeader
+              currentCategory={currentCategory}
+              AllProducts={AllProducts}
+              filteredItems={filteredItems}
+            />
             <ul className="grid grid-cols-16 gap-10 content-center">
               {filteredItems.map((product, index) => {
                 return (
@@ -69,9 +74,9 @@ const ProductsPage = () => {
               })}
             </ul>
 
-            {!loadingProducts ? (
+            {!loadingProducts  ? (
               <div className="flex items-center justify-center">
-                {!isSearching && (
+                {(!isSearching && !currentCategory) && (
                   <PaginationButton
                     click={() => {
                       setCurrentPage(currentPage + 1);

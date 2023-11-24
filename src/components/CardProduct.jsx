@@ -7,7 +7,7 @@ const CardProduct = ({ img, nombre, precio_exito, precio_olim, precio_d1 }) => {
   const formattedD1Price = UseFormatPrice(precio_d1);
 
   return (
-    <div className="max-w-sm mx-auto bg-black-white shadow-2xl rounded-lg overflow-hidden flex flex-col justify-center items-center  ">
+    <div className="max-w-sm mx-auto bg-black-white shadow-2xl rounded-lg overflow-hidden flex flex-col justify-center items-center ">
       <img
         loading="lazy"
         src={img}
@@ -15,18 +15,18 @@ const CardProduct = ({ img, nombre, precio_exito, precio_olim, precio_d1 }) => {
         alt="Product Image"
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold">{nombre}</h2>
+        <h2 className="text-xl font-poppins">{nombre}</h2>
         <div className="mt-2">
           {precio_exito > 0 && (
-            <p className="text-gray-600 font-bold">
+            <p className="text-gray-600 font-bold font-poppins">
               Exito: {formattedExitoPrice}
             </p>
           )}
           {precio_olim > 0 && (
-            <p className="text-gray-600">Olimpica: {formattedOlimPrice}</p>
+            <p className="text-gray-600 font-poppins  ">Olimpica: {formattedOlimPrice}</p>
           )}
           {precio_d1 > 0 && (
-            <p className="text-gray-600">D1: {formattedD1Price}</p>
+            <p className="text-gray-600 font-poppins  ">D1: {formattedD1Price}</p>
           )}
         </div>
       </div>

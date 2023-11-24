@@ -16,6 +16,9 @@ export default {
         'wcom': '#F1F3F5',
         'input': '#f4f6f8'
       },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
+      },
       
     },
   },
