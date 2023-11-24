@@ -9,7 +9,7 @@ import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
 import BackTopButton from "../components/backTopButton";
-import CategoriesSidebar from "../components/categoriesSidebar";
+import CategoriesSidebar from "../components/CategoriesSidebar";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

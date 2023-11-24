@@ -20,9 +20,7 @@ export const getProductos = async (
 
 export const getAllProductos = async (setAllProducts) => {
   try {
-    const response = await fetch(
-      `http://localhost:4000/productos/`
-    );
+    const response = await fetch(`http://localhost:4000/productos/`);
     const fetchedProducts = await response.json();
     setAllProducts(fetchedProducts);
   } catch (error) {
@@ -32,9 +30,7 @@ export const getAllProductos = async (setAllProducts) => {
 
 export const getCategories = async (setCategories) => {
   try {
-    const response = await fetch(
-      `http://localhost:4000/categorias`
-    );
+    const response = await fetch(`http://localhost:4000/categorias`);
     const fetchedCategories = await response.json();
     setCategories(fetchedCategories);
   } catch (error) {

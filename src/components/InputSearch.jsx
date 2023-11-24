@@ -18,7 +18,7 @@ const InputSearch = () => {
   // Fetch all products only once when the component mounts
   useEffect(() => {
     getAllProductos(setAllProducts);
-  }, [setAllProducts]);
+  }, []);
 
   // Callback for filtering products
   const filterProducts = useCallback(() => {
