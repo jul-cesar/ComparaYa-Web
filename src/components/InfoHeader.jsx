@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoHeader = ({currentCategory, AllProducts, filteredItems}) => {
   return (
-    <div class="flex flex-row justify-between p-4 border-b-2 border-gray-800  shadow-sm m-4">
+    <div class="flex flex-row justify-between p-4 border-b-2 border-gray-800  shadow-sm mt-14 mb-6 ml-8 mr-8">
       <p class="text-lg font-semibold text-gray-800">
         Categoria:{" "}
         <span class="text-blue-500" id="category-name">

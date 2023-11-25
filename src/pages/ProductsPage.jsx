@@ -41,42 +41,41 @@ const ProductsPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen bg-wip">
+    <div className="flex flex-col justify-between min-h-screen ">
+      <Navbar/>
+      <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
       <div>
-        <Navbar />
-
-        <div className="flex">
-          <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
-
-          <div className="p-24 flex-grow">
+        <div className="flex items-center justify-center">
+          <div className="flex-grow">
             <div className="fixed bottom-5 left-10 z-50">
-              {" "}
               {!isAtTop && <BackTopButton />}
             </div>
 
-            <InfoHeader
-              currentCategory={currentCategory}
-              AllProducts={AllProducts}
-              filteredItems={filteredItems}
-            />
-            <ul className="grid grid-cols-16 gap-10 content-center">
-              {filteredItems.map((product, index) => {
-                return (
-                  <CardProduct
-                    key={nanoid()}
-                    img={product.imagen_url}
-                    nombre={product.nombre}
-                    precio_exito={product.precio_exito}
-                    precio_olim={product.precio_olim}
-                    precio_d1={product.precio_d1}
-                  />
-                );
-              })}
-            </ul>
+            <div className="p-4 lg:ml-64"> {/* Apply ml-64 only for lg (large) screens and above */}
+              <InfoHeader
+                currentCategory={currentCategory}
+                AllProducts={AllProducts}
+                filteredItems={filteredItems}
+              />
+              <ul className="grid grid-cols-16 gap-10 content-center ">
+                {filteredItems.map((product, index) => {
+                  return (
+                    <CardProduct
+                      key={nanoid()}
+                      img={product.imagen_url}
+                      nombre={product.nombre}
+                      precio_exito={product.precio_exito}
+                      precio_olim={product.precio_olim}
+                      precio_d1={product.precio_d1}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
 
-            {!loadingProducts  ? (
+            {!loadingProducts ? (
               <div className="flex items-center justify-center">
-                {(!isSearching && !currentCategory) && (
+                {!isSearching && !currentCategory && (
                   <PaginationButton
                     click={() => {
                       setCurrentPage(currentPage + 1);
@@ -92,7 +91,6 @@ const ProductsPage = () => {
           </div>
         </div>
       </div>
-      {!loadingProducts && <Footer />}
     </div>
   );
 };

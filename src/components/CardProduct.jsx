@@ -23,10 +23,14 @@ const CardProduct = ({ img, nombre, precio_exito, precio_olim, precio_d1 }) => {
             </p>
           )}
           {precio_olim > 0 && (
-            <p className="text-gray-600 font-poppins  ">Olimpica: {formattedOlimPrice}</p>
+            <p className="text-gray-600 font-poppins  ">
+              Olimpica: {formattedOlimPrice}
+            </p>
           )}
           {precio_d1 > 0 && (
-            <p className="text-gray-600 font-poppins  ">D1: {formattedD1Price}</p>
+            <p className="text-gray-600 font-poppins  ">
+              D1: {formattedD1Price}
+            </p>
           )}
         </div>
       </div>

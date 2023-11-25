@@ -9,6 +9,7 @@ export const ProductsFunction = ({ children }) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [AllProducts, setAllProducts] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(false);
   return (
     <Products.Provider
       value={{
@@ -22,6 +23,8 @@ export const ProductsFunction = ({ children }) => {
         setAllProducts,
         isSearching,
         setIsSearching,
+        openSidebar,
+        setOpenSidebar
       }}
     >
       {children}
