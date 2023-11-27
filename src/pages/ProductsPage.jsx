@@ -12,7 +12,8 @@ import PaginationButton from "../components/PaginationButton";
 import CategoriesSidebar from "../components/CategoriesSidebar";
 import InfoHeader from "../components/InfoHeader";
 import Carrito from "../components/Carrito";
-import BackTopButton from "../components/BackTopButton";
+
+import TopButton from "../components/TopButton";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,7 +56,7 @@ const ProductsPage = () => {
         <div className="flex items-center justify-center">
           <div className="flex-grow">
             <div className="fixed bottom-5 right-10 z-50">
-              {!isAtTop && <BackTopButton />}
+              {!isAtTop && <TopButton />}
             </div>
 
             <div className="p-4 lg:ml-64">
