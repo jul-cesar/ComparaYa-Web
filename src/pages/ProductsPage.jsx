@@ -10,7 +10,7 @@ import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
 
 import CategoriesSidebar from "../components/CategoriesSidebar";
-import InfoHeader from "../components/infoHeader";
+import InfoHeader from "../components/InfoHeader";
 import Carrito from "../components/Carrito";
 import BackTopButton from "../components/BackTopButton";
 
