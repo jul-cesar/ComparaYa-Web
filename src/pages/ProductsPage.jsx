@@ -8,13 +8,15 @@ import Lottie from "lottie-react";
 import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
-import BackTopButton from "../components/backTopButton";
-import CategoriesSidebar from "../components/categoriesSidebar";
+import BackTopButton from "../components/BackTopButton";
+import CategoriesSidebar from "../components/CategoriesSidebar";
 import InfoHeader from "../components/infoHeader";
+import Carrito from "../components/Carrito";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAtTop, setIsAtTop] = useState(true);
+
   const [currentCategory, setCurrentCategory] = useState();
 
   const {
@@ -41,26 +43,31 @@ const ProductsPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen ">
-      <Navbar/>
+    <div className="flex flex-col  min-h-screen justify-center ">
+      <Navbar />
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
-      <div>
+      <div className="flex items-center justify-center">
+        <Carrito />
+      </div>
+
+      <div className="p-6">
         <div className="flex items-center justify-center">
           <div className="flex-grow">
-            <div className="fixed bottom-5 left-10 z-50">
+            <div className="fixed bottom-5 right-10 z-50">
               {!isAtTop && <BackTopButton />}
             </div>
 
-            <div className="p-4 lg:ml-64"> {/* Apply ml-64 only for lg (large) screens and above */}
+            <div className="p-4 lg:ml-64">
               <InfoHeader
                 currentCategory={currentCategory}
                 AllProducts={AllProducts}
                 filteredItems={filteredItems}
               />
-              <ul className="grid grid-cols-16 gap-10 content-center ">
+              <ul className="grid grid-cols-16 gap-10 content-center">
                 {filteredItems.map((product, index) => {
                   return (
                     <CardProduct
+                      product={product}
                       key={nanoid()}
                       img={product.imagen_url}
                       nombre={product.nombre}

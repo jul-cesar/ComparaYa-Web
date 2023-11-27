@@ -10,6 +10,8 @@ export const ProductsFunction = ({ children }) => {
   const [AllProducts, setAllProducts] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [openCarrito, setOpenCarrito] = useState(true);
+  const [productsInCart, setProductsInCart] = useState([]);
   return (
     <Products.Provider
       value={{
@@ -24,7 +26,11 @@ export const ProductsFunction = ({ children }) => {
         isSearching,
         setIsSearching,
         openSidebar,
-        setOpenSidebar
+        setOpenSidebar,
+        setOpenCarrito,
+        openCarrito,
+        productsInCart,
+        setProductsInCart
       }}
     >
       {children}
