@@ -28,6 +28,7 @@ const ProductsPage = () => {
     setLoadingProducts,
     filteredItems,
     isSearching,
+    openCarrito
   } = useContext(Products);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const ProductsPage = () => {
         <div className="flex items-center justify-center">
           <div className="flex-grow">
             <div className="fixed bottom-5 right-10 z-50">
-              {!isAtTop && <TopButton />}
+              {(!isAtTop && !openCarrito) && <TopButton />}
             </div>
 
             <div className="p-4 lg:ml-64">

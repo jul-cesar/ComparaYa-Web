@@ -35,7 +35,7 @@ const Carrito = () => {
         openCarrito ? "flex" : "hidden"
       } items-center justify-center fixed top-0 bottom-0 right-0 p-4 left-0 z-50 w-full h-full bg-black bg-opacity-50`}
     >
-      <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-screen  max-w-2xl max-h-[500px] overflow-y-auto">
+      <div className="relative bg-white rounded-lg items-center flex-col flex shadow dark:bg-gray-700 w-screen  max-w-2xl max-h-[450px] overflow-y-auto overflow-x-hidden">
         <div className="flex  items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             Carrito de compras
@@ -68,7 +68,7 @@ const Carrito = () => {
         <div className="flex flex-row p-3 over   md:p-5 space-y-4">
           <div class="rounded-lg md:w-screen" ref={parent}>
             {productsInCart.map((cart) => (
-              <div class="justify-between items-center mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+              <div class="justify-between items-center flex flex-col mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                 <img
                   src={cart.img}
                   alt="product-image"
@@ -136,8 +136,8 @@ const Carrito = () => {
             ))}
           </div>
         </div>
-        <div class="m-4 p-4 md:p-5 md:w-[500px]  border-t w-full  border-gray-200 rounded-b dark:border-gray-600">
-          <div class="mt-6 h-full items-center  rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-[600px]">
+        <div class="m-4 p-4 md:p-5 md:w-[400px] border-t w-full  border-gray-200 rounded-b dark:border-gray-600">
+          <div class="mt-6 h-full items-center  rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-[520px]">
             <div class="mb-2 flex justify-between">
               <p class="text-gray-700">Monto total Exito</p>
               <p class="text-gray-700">{UseFormatPrice(montoTotalExito)}</p>

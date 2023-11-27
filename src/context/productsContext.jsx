@@ -10,7 +10,7 @@ export const ProductsFunction = ({ children }) => {
   const [AllProducts, setAllProducts] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
-  const [openCarrito, setOpenCarrito] = useState(true);
+  const [openCarrito, setOpenCarrito] = useState(false);
   const [productsInCart, setProductsInCart] = useState([]);
   return (
     <Products.Provider
