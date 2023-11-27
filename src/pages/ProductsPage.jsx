@@ -3,15 +3,16 @@ import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
 import CardProduct from "../components/CardProduct";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 import Lottie from "lottie-react";
 import load from "../media/load .json";
 import { nanoid } from "nanoid";
 import PaginationButton from "../components/PaginationButton";
-import BackTopButton from "../components/BackTopButton";
+
 import CategoriesSidebar from "../components/CategoriesSidebar";
 import InfoHeader from "../components/infoHeader";
 import Carrito from "../components/Carrito";
+import BackTopButton from "../components/BackTopButton";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
