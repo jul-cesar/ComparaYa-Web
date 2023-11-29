@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Products } from "../context/productsContext";
-import { useDebounce } from "../hooks/useDebounce";
-import { getAllProductos } from "../api/productsFetching";
-import { ScrollToTop } from "../utils/scrollTop";
+import { Products } from "../../../context/productsContext";
+import { useDebounce } from "../../../hooks/useDebounce";
+import { getAllProductos } from "../../../api/productsFetching";
+import { ScrollToTop } from "../../../utils/scrollTop";
 
 const InputSearch = () => {
   const {

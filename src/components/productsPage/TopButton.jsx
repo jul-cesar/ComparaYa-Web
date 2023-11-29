@@ -1,6 +1,6 @@
 import React from "react";
 import "../custom-styles/topButton.css";
-import { ScrollToTop } from "../utils/scrollTop";
+import { ScrollToTop } from "../../utils/scrollTop";
 
 const TopButton = () => {
   return (

@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
-import CardProduct from "../components/CardProduct";
-import Navbar from "../components/Navbar";
+import CardProduct from "../components/productsPage/Product/CardProduct";
+import Navbar from "../components/productsPage/Navbar";
 
 import Lottie from "lottie-react";
 import load from "../media/load .json";
 import { nanoid } from "nanoid";
-import PaginationButton from "../components/PaginationButton";
+import PaginationButton from "../components/productsPage/PaginationButton";
 
-import CategoriesSidebar from "../components/CategoriesSidebar";
-import InfoHeader from "../components/InfoHeader";
-import Carrito from "../components/Carrito";
-
-import TopButton from "../components/TopButton";
+import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
+import InfoHeader from "../components/productsPage/Product/InfoHeader";
+import Carrito from "../components/productsPage/Carrito/Carrito";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,7 +26,7 @@ const ProductsPage = () => {
     setLoadingProducts,
     filteredItems,
     isSearching,
-    openCarrito
+    openCarrito,
   } = useContext(Products);
 
   useEffect(() => {
@@ -48,7 +46,9 @@ const ProductsPage = () => {
   return (
     <div className="flex flex-col  min-h-screen justify-center dark:bg-gray-800 ">
       <Navbar />
+
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
+
       <div className="flex items-center justify-center">
         <Carrito />
       </div>
@@ -56,9 +56,9 @@ const ProductsPage = () => {
       <div className="p-6">
         <div className="flex items-center justify-center">
           <div className="flex-grow">
-            <div className="fixed bottom-5 right-10 z-50">
+            {/* <div className="fixed bottom-5 right-10 z-50">
               {(!isAtTop && !openCarrito) && <TopButton />}
-            </div>
+            </div> */}
 
             <div className="p-4 lg:ml-64">
               <InfoHeader
