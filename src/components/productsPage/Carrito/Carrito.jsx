@@ -4,6 +4,9 @@ import { UseFormatPrice } from "../../../hooks/useFormatPrice";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Total from "./Total";
 import DistribuidoraTag from "../../DistribuidoraTag";
+import empty from "../../../media/empty.json"
+
+import Lottie from "lottie-react";
 
 const Carrito = () => {
   const { openCarrito, setOpenCarrito, productsInCart, setProductsInCart } =
@@ -19,7 +22,8 @@ const Carrito = () => {
         openCarrito ? "flex" : "hidden"
       } items-center justify-center fixed top-0 bottom-0 right-0 p-4 left-0 z-50 w-full h-full bg-black bg-opacity-50`}
     >
-      <div className="relative bg-white rounded-lg items-center flex-col sm:block sm:items-center flex shadow dark:bg-gray-700 w-screen max-w-2xl max-h-[450px] overflow-y-auto overflow-x-hidden">
+      
+      <div className="relative bg-white rounded-lg  flex-col sm:block sm:items-center flex shadow dark:bg-gray-700 w-screen max-w-2xl max-h-[500px] overflow-y-auto overflow-x-hidden">
         <div className="flex  items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             Carrito de compras
@@ -49,6 +53,11 @@ const Carrito = () => {
           </button>
         </div>
 
+        { productsInCart.length === 0 && <div className="flex flex-col justify-center items-center p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Carrito vacio, agrega productos</h2>
+          <Lottie animationData={empty} className="h-[360px] w-[400px]" />
+        </div>}
+
         <div className="flex flex-row p-3 over   md:p-5 space-y-4">
           <div className="rounded-lg md:w-screen" ref={parent}>
             {productsInCart.map((cart) => (
@@ -63,7 +72,11 @@ const Carrito = () => {
                     <h2 className="text-lg font-bold text-gray-900">
                       {cart.nombre}
                     </h2>
-                <DistribuidoraTag precio_d1={cart.precio_d1} precio_exito={cart.precio_exito} precio_olim={cart.precio_olim}/>
+                    <DistribuidoraTag
+                      precio_d1={cart.precio_d1}
+                      precio_exito={cart.precio_exito}
+                      precio_olim={cart.precio_olim}
+                    />
                   </div>
                   <div className="mt-4 flex justify-between im sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                     <div className="flex items-center border-gray-100">
@@ -120,7 +133,7 @@ const Carrito = () => {
             ))}
           </div>
         </div>
-        <Total />
+       {productsInCart.length !== 0 &&  <Total />}
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ function Navbar() {
               </svg>
             </button>
             <a href="" className="flex ms-2 md:me-24">
-              <div className="flex items-center justify-center ">
+              {/* <div className="flex items-center justify-center ">
                 {" "}
                 <img
                   src={logo}
@@ -50,7 +50,7 @@ function Navbar() {
                   alt="Company Text Logo"
                   className="h-12 w-56 sm:h-13.5 md:h-13 lg:h-13 object-cover"
                 />
-              </div>
+              </div> */}
             </a>
           </div>
           <div className="flex items-center">

@@ -6,12 +6,12 @@ import InputSearch from "./InputSearch";
 import SidebarOption from "./sidebarOption";
 import DropdownCategorias from "./DropdownCategorias";
 
-const CategoriesSidebar = ({setCurrentCategory}) => {
+const CategoriesSidebar = ({ setCurrentCategory }) => {
   const { openSidebar, setOpenCarrito, openCarrito, productsInCart } =
     useContext(Products);
 
   const [categories, setCategories] = useState([]);
-
+  
   
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const CategoriesSidebar = ({setCurrentCategory}) => {
       <aside
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
-          openSidebar && "-translate-x-full"
+          !openSidebar && "-translate-x-full"
         } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidebar"
       >
@@ -32,7 +32,6 @@ const CategoriesSidebar = ({setCurrentCategory}) => {
             <li>
               <InputSearch />
 
-            
               <DropdownCategorias
                 setCurrentCategory={setCurrentCategory}
                 categories={categories}

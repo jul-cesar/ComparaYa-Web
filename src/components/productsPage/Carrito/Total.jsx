@@ -22,7 +22,7 @@ const Total = () => {
   const montoTotal =
     Number(montoTotalD1) + Number(montoTotalOlim) + Number(montoTotalExito);
   return (
-    <div className="m-4 p-4 md:p-5 md:w-[400px] border-t w-full  border-gray-200 rounded-b dark:border-gray-600">
+    <div className="m-4 p-4 md:p-5 md:w-[400px] border-t w-full self-center  border-gray-200 rounded-b dark:border-gray-600">
       <div className="mt-6 h-full flex-col items-center  rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-[600px]  ">
         <div className="mb-2 flex justify-between">
           <p className="text-gray-700">Monto total Exito</p>

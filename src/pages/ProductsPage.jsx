@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { Suspense, memo, useContext, useEffect, useState } from "react";
 import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
 import CardProduct from "../components/productsPage/Product/CardProduct";
@@ -15,7 +15,7 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isAtTop, setIsAtTop] = useState(true);
+
 
   const [currentCategory, setCurrentCategory] = useState();
 
@@ -33,15 +33,6 @@ const ProductsPage = () => {
     getProductos(setProducts, setLoadingProducts, currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsAtTop(window.scrollY === 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <div className="flex flex-col  min-h-screen justify-center dark:bg-gray-800 ">
@@ -105,4 +96,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default memo(ProductsPage) ;

@@ -6,7 +6,7 @@ const PaginationButton = ({click}) => {
       
       <button
         onClick={click}
-        className="m-10 shadow-xl relative z-30 inline-flex items-center justify-center 
+        className="m-10 ml-20 shadow-xl relative z-30 inline-flex items-center justify-center 
             w-auto px-8 py-3 overflow-hidden font-bold 
             text-gray-500 transition-all duration-500 border border-gray-200 
             rounded-md cursor-pointer group ease bg-gradient-to-b 
