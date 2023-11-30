@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { getCategories } from "../../../api/productsFetching";
 import { Products } from "../../../context/productsContext";
 import InputSearch from "./InputSearch";
-import SidebarOption from "./sidebarOption";
+import SidebarOption from "./SidebarOption";
 import DropdownCategorias from "./DropdownCategorias";
 
 const CategoriesSidebar = ({ setCurrentCategory }) => {
@@ -11,8 +11,6 @@ const CategoriesSidebar = ({ setCurrentCategory }) => {
     useContext(Products);
 
   const [categories, setCategories] = useState([]);
-  
-  
 
   useEffect(() => {
     getCategories(setCategories);
