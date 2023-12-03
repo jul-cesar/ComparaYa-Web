@@ -16,7 +16,6 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const [currentCategory, setCurrentCategory] = useState();
 
   const {
@@ -32,7 +31,6 @@ const ProductsPage = () => {
   useEffect(() => {
     getProductos(setProducts, setLoadingProducts, currentPage);
   }, [currentPage]);
-
 
   return (
     <div className="flex flex-col  min-h-screen justify-center dark:bg-gray-800 ">
@@ -96,4 +94,4 @@ const ProductsPage = () => {
   );
 };
 
-export default memo(ProductsPage) ;
+export default memo(ProductsPage);

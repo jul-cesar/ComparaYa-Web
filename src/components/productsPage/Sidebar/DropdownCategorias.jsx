@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Products } from "../../../context/productsContext";
 import OpenDropdownButton from "./OpenDropdownButton";
-import { getProductsByCategory } from "../../../api/productsFetching";
+import {
+  getProductos,
+  getProductsByCategory,
+} from "../../../api/productsFetching";
+import { ScrollToTop } from "../../../utils/scrollTop";
 
 const DropdownCategorias = ({ categories, setCurrentCategory }) => {
   const [openCategories, setOpenCategories] = useState(false);
-  const { setProducts, setFilteredItems, setLoadingProducts } =
+  const { setProducts, setFilteredItems, setLoadingProducts, setOpenSidebar } =
     useContext(Products);
   return (
     <>
@@ -22,6 +26,8 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
             onClick={() => {
               getProductos(setProducts, setLoadingProducts, 1);
               setCurrentCategory("");
+              setOpenSidebar(false);
+              ScrollToTop();
             }}
             className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 cursor-pointer"
           >
@@ -34,6 +40,8 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
               onClick={() => {
                 getProductsByCategory(setFilteredItems, categorie.id);
                 setCurrentCategory(categorie.nombre);
+                setOpenSidebar(false);
+                ScrollToTop();
               }}
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 cursor-pointer"
             >

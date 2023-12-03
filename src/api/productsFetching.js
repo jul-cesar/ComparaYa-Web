@@ -20,7 +20,9 @@ export const getProductos = async (
 
 export const getAllProductos = async (setAllProducts) => {
   try {
-    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/`);
+    const response = await fetch(
+      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/`
+    );
     const fetchedProducts = await response.json();
     setAllProducts(fetchedProducts);
   } catch (error) {
@@ -30,7 +32,9 @@ export const getAllProductos = async (setAllProducts) => {
 
 export const getCategories = async (setCategories) => {
   try {
-    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/categorias`);
+    const response = await fetch(
+      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/categorias`
+    );
     const fetchedCategories = await response.json();
     setCategories(fetchedCategories);
   } catch (error) {

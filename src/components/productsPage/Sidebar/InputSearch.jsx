@@ -51,7 +51,7 @@ const InputSearch = () => {
   }, [query, products, setFilteredItems, setIsSearching]);
 
   return (
-    <div className="hidden md:flex  rounded bg-input shadow-md ">
+    <div className="md:flex flex rounded bg-input shadow-md ">
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
