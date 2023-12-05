@@ -11,6 +11,9 @@ export const ProductsFunction = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const [openCarrito, setOpenCarrito] = useState(false);
+  const [loadingCategoryProducts, setLoadingCategoryProducts] = useState(false);
+  const [loadingProductsFirst, setLoadingProductsFirst] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
   return (
     <Products.Provider
@@ -30,7 +33,13 @@ export const ProductsFunction = ({ children }) => {
         setOpenCarrito,
         openCarrito,
         productsInCart,
-        setProductsInCart
+        setProductsInCart,
+        currentCategory,
+        setCurrentCategory,
+        loadingCategoryProducts,
+        setLoadingCategoryProducts,
+        loadingProductsFirst,
+        setLoadingProductsFirst
       }}
     >
       {children}

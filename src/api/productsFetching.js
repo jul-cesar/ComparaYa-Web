@@ -1,10 +1,14 @@
+import { ScrollToTop } from "../utils/scrollTop";
+
 // productsFetching.js
 export const getProductos = async (
   setProducts,
   setLoadingProducts,
-  currentPage
+  currentPage,
+
 ) => {
   setLoadingProducts(true);
+  
   try {
     const response = await fetch(
       `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/${currentPage}/16`
@@ -15,6 +19,7 @@ export const getProductos = async (
     console.error("Failed to fetch products:", error);
   } finally {
     setLoadingProducts(false);
+
   }
 };
 
@@ -42,14 +47,24 @@ export const getCategories = async (setCategories) => {
   }
 };
 
-export const getProductsByCategory = async (setFilteredItems, category) => {
+export const getProductsByCategory = async (
+  setFilteredItems,
+  category,
+  setLoadingCategoryProducts
+) => {
+  setLoadingCategoryProducts(true);
   try {
     const response = await fetch(
       `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/categoria/${category}`
     );
     const fetchedCategories = await response.json();
+
+    setCurrentCategory(category.nombre);
     setFilteredItems(fetchedCategories);
+    ScrollToTop();
   } catch (error) {
     console.error("Failed to fetch cats:", error);
+  } finally {
+    setLoadingCategoryProducts(false);
   }
 };

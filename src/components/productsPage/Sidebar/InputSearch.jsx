@@ -11,6 +11,7 @@ const InputSearch = () => {
     products,
     setAllProducts,
     setIsSearching,
+    setOpenSidebar,
   } = useContext(Products);
   const [query, setQuery] = useState("");
   const debouncedSearch = useDebounce(query);
@@ -33,6 +34,7 @@ const InputSearch = () => {
     ScrollToTop();
     setFilteredItems(filtered);
     setIsSearching(true);
+    setOpenSidebar(false);
   }, [AllProducts, debouncedSearch, setFilteredItems, setIsSearching]);
 
   // Effect for handling debounced search

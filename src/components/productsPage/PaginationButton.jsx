@@ -1,9 +1,8 @@
 import React from "react";
 
-const PaginationButton = ({click}) => {
+const PaginationButton = ({ click }) => {
   return (
-    <div>
-      
+    <div className="flex items-center justify-center">
       <button
         onClick={click}
         className="m-10 ml-20 shadow-xl relative z-30 inline-flex items-center justify-center 

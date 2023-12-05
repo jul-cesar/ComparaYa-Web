@@ -9,15 +9,37 @@ const CardCart = ({
   precio_d1,
   precio_exito,
   precio_olim,
-  quantity,
+  quantity = 1,
   setProductsInCart,
   productsInCart,
   id,
 }) => {
-  const [parent, enableAnimations] = useAutoAnimate();
+  const IncreaseQuantity = () => {
+    setProductsInCart((prevState) =>
+      prevState.map((p) =>
+        p.id === id ? { ...p, quantity: p.quantity + 1 } : p
+      )
+    );
+  };
+
+  const handleQuantityChange = (e) => {
+    if (e > 0) {
+      setProductsInCart((prevState) =>
+        prevState.map((p) => (p.id === id ? { ...p, quantity: e } : p))
+      );
+    }
+  };
+  const DecreaceQuantity = () => {
+    setProductsInCart((prevState) =>
+      prevState.map((p) =>
+        p.id === id ? { ...p, quantity: Math.max(1, p.quantity - 1) } : p
+      )
+    );
+  };
+
   return (
-    <div className="flex flex-row p-3 over   md:p-5 space-y-4" ref={parent}>
-      <div className="rounded-lg md:w-screen" >
+    <div className="flex flex-row p-3 over   md:p-5 space-y-4">
+      <div className="rounded-lg md:w-screen">
         <div className="justify-between items-center flex flex-col mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
           <img
             src={img}
@@ -35,7 +57,10 @@ const CardCart = ({
             </div>
             <div className="mt-4 flex justify-between im sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
               <div className="flex items-center border-gray-100">
-                <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
+                <span
+                  className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                  onClick={DecreaceQuantity}
+                >
                   {" "}
                   -{" "}
                 </span>
@@ -43,9 +68,13 @@ const CardCart = ({
                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
                   type="number"
                   value={quantity}
-                  min="1"
+                  min={1}
+                  onChange={(e) => handleQuantityChange(e.target.value)}
                 />
-                <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">
+                <span
+                  className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                  onClick={IncreaseQuantity}
+                >
                   {" "}
                   +{" "}
                 </span>
