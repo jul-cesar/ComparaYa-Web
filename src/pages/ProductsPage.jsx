@@ -13,6 +13,7 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 
 import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
 import ErrorModal from "../components/ErrorModal";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,34 +70,37 @@ const ProductsPage = () => {
                   filteredItems={filteredItems}
                 />
               )}
-              <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
-                {!loadingProducts && !loadingCategoryProducts && !errorCats ? (
-                  filteredItems.map((product, index) => {
-                    return (
-                      <CardProduct
-                        product={product}
-                        key={nanoid()}
-                        img={product.imagen_url}
-                        nombre={product.nombre}
-                        precio_exito={product.precio_exito}
-                        precio_olim={product.precio_olim}
-                        precio_d1={product.precio_d1}
-                      />
-                    );
-                  })
-                ) : (
-                  <ProductSkeleton />
-                )}
-              </ul>
-            </div>
-
-            {!isSearching && !currentCategory && (
-              <PaginationButton
-                click={() => {
+              <InfiniteScroll
+                dataLength={filteredItems.length}
+                hasMore={currentCategory === undefined }
+                loader={<p>Loading</p>}
+                next={() => {
                   setCurrentPage(currentPage + 1);
                 }}
-              />
-            )}
+              >
+                <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
+                  {!loadingProducts &&
+                  !loadingCategoryProducts &&
+                  !errorCats ? (
+                    filteredItems.map((product, index) => {
+                      return (
+                        <CardProduct
+                          product={product}
+                          key={nanoid()}
+                          img={product.imagen_url}
+                          nombre={product.nombre}
+                          precio_exito={product.precio_exito}
+                          precio_olim={product.precio_olim}
+                          precio_d1={product.precio_d1}
+                        />
+                      );
+                    })
+                  ) : (
+                    <ProductSkeleton />
+                  )}
+                </ul>
+              </InfiniteScroll>
+            </div>
           </div>
         </div>
       </div>
