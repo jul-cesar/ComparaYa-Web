@@ -12,15 +12,17 @@ const InputSearch = () => {
     setAllProducts,
     setIsSearching,
     setOpenSidebar,
+    setNoResults,
+    setQuery,
+    query,
+    noResults,
   } = useContext(Products);
-  const [query, setQuery] = useState("");
-  const debouncedSearch = useDebounce(query);
 
+  const debouncedSearch = useDebounce(query);
 
   useEffect(() => {
     getAllProductos(setAllProducts);
   }, []);
-
 
   const filterProducts = useCallback(() => {
     const filtered = AllProducts.filter((p) =>
@@ -31,6 +33,7 @@ const InputSearch = () => {
         .replace(/[\u0300-\u036f]/g, "")
         .includes(debouncedSearch.toLowerCase())
     );
+    filtered.length < 1 && setNoResults(true);
     ScrollToTop();
     setFilteredItems(filtered);
     setIsSearching(true);
@@ -73,8 +76,11 @@ const InputSearch = () => {
           </svg>
         </div>
         <input
+          disabled={noResults}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

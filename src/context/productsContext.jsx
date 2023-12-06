@@ -11,6 +11,9 @@ export const ProductsFunction = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const [openCarrito, setOpenCarrito] = useState(false);
+  const [noResults, setNoResults] = useState(false);
+  const [errorCats, setErrorCats] = useState(false)
+  const [query, setQuery] = useState("");
   const [loadingCategoryProducts, setLoadingCategoryProducts] = useState(false);
   const [loadingProductsFirst, setLoadingProductsFirst] = useState(false);
   const [currentCategory, setCurrentCategory] = useState();
@@ -40,6 +43,12 @@ export const ProductsFunction = ({ children }) => {
         setLoadingCategoryProducts,
         loadingProductsFirst,
         setLoadingProductsFirst,
+        noResults,
+        setNoResults,
+        setQuery,
+        query,
+        errorCats,
+        setErrorCats
       }}
     >
       {children}

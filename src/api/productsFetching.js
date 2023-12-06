@@ -4,11 +4,10 @@ import { ScrollToTop } from "../utils/scrollTop";
 export const getProductos = async (
   setProducts,
   setLoadingProducts,
-  currentPage,
-
+  currentPage
 ) => {
   setLoadingProducts(true);
-  
+
   try {
     const response = await fetch(
       `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/${currentPage}/8`
@@ -19,15 +18,12 @@ export const getProductos = async (
     console.error("Failed to fetch products:", error);
   } finally {
     setLoadingProducts(false);
-
   }
 };
 
 export const getAllProductos = async (setAllProducts) => {
   try {
-    const response = await fetch(
-      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/`
-    );
+    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/`);
     const fetchedProducts = await response.json();
     setAllProducts(fetchedProducts);
   } catch (error) {
@@ -37,9 +33,7 @@ export const getAllProductos = async (setAllProducts) => {
 
 export const getCategories = async (setCategories) => {
   try {
-    const response = await fetch(
-      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/categorias`
-    );
+    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/categorias`);
     const fetchedCategories = await response.json();
     setCategories(fetchedCategories);
   } catch (error) {
@@ -50,7 +44,9 @@ export const getCategories = async (setCategories) => {
 export const getProductsByCategory = async (
   setFilteredItems,
   category,
-  setLoadingCategoryProducts
+  setLoadingCategoryProducts,
+  setErrorCats,
+  setCurrentCategory
 ) => {
   setLoadingCategoryProducts(true);
   try {
@@ -58,12 +54,14 @@ export const getProductsByCategory = async (
       `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/categoria/${category}`
     );
     const fetchedCategories = await response.json();
-
     setCurrentCategory(category.nombre);
     setFilteredItems(fetchedCategories);
     ScrollToTop();
   } catch (error) {
-    console.error("Failed to fetch cats:", error);
+    console.error(error);
+    if (error.message.includes("fetch")) {
+      setErrorCats(true);
+    }
   } finally {
     setLoadingCategoryProducts(false);
   }

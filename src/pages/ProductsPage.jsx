@@ -1,11 +1,4 @@
-import React, {
-  Suspense,
-  memo,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
 import CardProduct from "../components/productsPage/Product/CardProduct";
@@ -19,11 +12,10 @@ import InfoHeader from "../components/productsPage/Product/InfoHeader";
 import Carrito from "../components/productsPage/Carrito/Carrito";
 
 import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
-
+import ErrorModal from "../components/ErrorModal";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
- 
 
   const {
     setProducts,
@@ -34,7 +26,9 @@ const ProductsPage = () => {
     isSearching,
     setCurrentCategory,
     currentCategory,
-    setOpenCarrito,
+    noResults,
+    query,
+    errorCats,
     loadingCategoryProducts,
   } = useContext(Products);
 
@@ -47,9 +41,17 @@ const ProductsPage = () => {
       <Navbar />
 
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
-
       <div className="flex items-center justify-center">
-        <Carrito  />
+        {errorCats && <ErrorModal message={"Error cats"} />}
+      </div>
+      <div className="flex items-center justify-center">
+        {noResults && (
+          <ErrorModal
+            message={`no se han encontrado resultados para "${query}"`}
+          />
+        )}
+
+        <Carrito />
       </div>
 
       <div className="p-1 sm:p-5">
@@ -60,13 +62,15 @@ const ProductsPage = () => {
             </div> */}
 
             <div className="p-4 lg:ml-64">
-              <InfoHeader
-                currentCategory={currentCategory}
-                AllProducts={AllProducts}
-                filteredItems={filteredItems}
-              />
+              {!noResults && (
+                <InfoHeader
+                  currentCategory={currentCategory}
+                  AllProducts={AllProducts}
+                  filteredItems={filteredItems}
+                />
+              )}
               <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
-                {!loadingProducts && !loadingCategoryProducts ? (
+                {!loadingProducts && !loadingCategoryProducts && !errorCats ? (
                   filteredItems.map((product, index) => {
                     return (
                       <CardProduct

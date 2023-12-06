@@ -6,7 +6,7 @@ import InputSearch from "./InputSearch";
 import SidebarOption from "./SidebarOption";
 import DropdownCategorias from "./DropdownCategorias";
 
-const CategoriesSidebar = ({ setCurrentCategory }) => {
+const CategoriesSidebar = ({ setCurrentCategory}) => {
   const { openSidebar, setOpenCarrito, openCarrito, productsInCart } =
     useContext(Products);
 
@@ -28,7 +28,7 @@ const CategoriesSidebar = ({ setCurrentCategory }) => {
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li>
-              <InputSearch />
+              <InputSearch  />
 
               <DropdownCategorias
                 setCurrentCategory={setCurrentCategory}
