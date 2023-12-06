@@ -3,7 +3,7 @@ import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
 import { ScrollToTop } from "../utils/scrollTop";
 
-const ErrorModal = ({ message, clicked }) => {
+const ErrorModal = ({ message, currentPage }) => {
   const [close, setClose] = useState(false);
   const {
     setNoResults,
@@ -73,7 +73,7 @@ const ErrorModal = ({ message, clicked }) => {
                 setClose(true);
                 setNoResults(false);
                 setQuery("");
-                getProductos(setProducts, setLoadingProducts, 1);
+                getProductos(setProducts, setLoadingProducts, currentPage);
                 setCurrentCategory("");
               }}
               data-modal-hide="popup-modal"

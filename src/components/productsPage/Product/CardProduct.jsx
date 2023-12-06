@@ -19,6 +19,7 @@ const CardProduct = React.memo(
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex flex-col items-center">
           <img
+          loading="lazy"
             className="object-cover sm:h-52 sm:w-48 m-4 h-[140px] w-36 rounded-t-lg max-w-full mb-2"
             src={img}
             alt={img}
