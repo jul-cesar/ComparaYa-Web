@@ -39,7 +39,7 @@ export const ProductsFunction = ({ children }) => {
         loadingCategoryProducts,
         setLoadingCategoryProducts,
         loadingProductsFirst,
-        setLoadingProductsFirst
+        setLoadingProductsFirst,
       }}
     >
       {children}

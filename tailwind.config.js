@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       gridTemplateColumns: {
-        '16': 'repeat(auto-fit, minmax(250px, auto))',
-        'mobile':  'repeat(auto-fit, minmax(150px, 1fr))',
+        '16': 'repeat(auto-fit, minmax(230px, auto))',
+        'mobile':  'repeat(auto-fit, minmax(120px, 2fr))',
       },
       colors: {
         'wip': '#ffffff',

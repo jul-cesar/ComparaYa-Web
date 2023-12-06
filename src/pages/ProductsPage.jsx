@@ -1,4 +1,11 @@
-import React, { Suspense, memo, useContext, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Products } from "../context/productsContext";
 import { getProductos } from "../api/productsFetching";
 import CardProduct from "../components/productsPage/Product/CardProduct";
@@ -11,11 +18,12 @@ import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSide
 import InfoHeader from "../components/productsPage/Product/InfoHeader";
 import Carrito from "../components/productsPage/Carrito/Carrito";
 
-import LoadingProductsSpinner from "../components/LoadingProductsSpinner";
 import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
+
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+ 
 
   const {
     setProducts,
@@ -26,6 +34,7 @@ const ProductsPage = () => {
     isSearching,
     setCurrentCategory,
     currentCategory,
+    setOpenCarrito,
     loadingCategoryProducts,
   } = useContext(Products);
 
@@ -40,10 +49,10 @@ const ProductsPage = () => {
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
 
       <div className="flex items-center justify-center">
-        <Carrito />
+        <Carrito  />
       </div>
 
-      <div className="p-6">
+      <div className="p-1 sm:p-5">
         <div className="flex items-center justify-center">
           <div className="flex-grow">
             {/* <div className="fixed bottom-5 right-10 z-50">
@@ -56,7 +65,7 @@ const ProductsPage = () => {
                 AllProducts={AllProducts}
                 filteredItems={filteredItems}
               />
-              <ul className="grid grid-cols-16 gap-10 content-center">
+              <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
                 {!loadingProducts && !loadingCategoryProducts ? (
                   filteredItems.map((product, index) => {
                     return (

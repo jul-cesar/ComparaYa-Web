@@ -42,7 +42,7 @@ const CartIcon = ({ product, setProductsInCart, productsInCart }) => {
         </div>
       ) : (
         <div className="t-0 absolute left-3">
-          <p className="flex h-2 w-2 items-center justify-center rounded-full bg-gray-500 p-3 text-xs text-white">
+          <p className="flex h-[1px] w-[1px] sm:h-2 sm:w-2 items-center justify-center rounded-full bg-gray-500 p-3 text-xs text-white">
             +
           </p>
         </div>
@@ -54,7 +54,7 @@ const CartIcon = ({ product, setProductsInCart, productsInCart }) => {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="file:  h-[50px] w-[50px]"
+        className="file: h-[45px] w-[30px]  sm:h-[50px]  sm:w-[50px]"
       >
         <path
           strokeLinecap="round"

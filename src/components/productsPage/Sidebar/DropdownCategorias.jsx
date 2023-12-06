@@ -9,7 +9,7 @@ import { ScrollToTop } from "../../../utils/scrollTop";
 
 const DropdownCategorias = ({ categories, setCurrentCategory }) => {
   const [openCategories, setOpenCategories] = useState(false);
-  const { setProducts, setFilteredItems, setLoadingProducts, setOpenSidebar, setLoadingCategorias } =
+  const { setProducts, setFilteredItems, setLoadingProducts, setOpenSidebar, setLoadingCategorias, setLoadingCategoryProducts } =
     useContext(Products);
   return (
     <>
@@ -38,7 +38,7 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
           <li key={categorie.id}>
             <a
               onClick={() => {
-                getProductsByCategory(setFilteredItems, categorie.id, setLoadingCategorias);
+                getProductsByCategory(setFilteredItems, categorie.id, setLoadingCategoryProducts);
                 setOpenSidebar(false);
               }}
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 cursor-pointer"
