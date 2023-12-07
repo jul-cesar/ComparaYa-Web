@@ -13,7 +13,7 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { setProducts, setLoadingProducts, filteredItems } =
     useContext(Products);
-    
+
   const { setCurrentCategory, noResults, query, errorCats } =
     useContext(SidebarContext);
 

@@ -38,14 +38,12 @@ const InputSearch = () => {
     setOpenSidebar(false);
   }, [AllProducts, debouncedSearch, setFilteredItems, setIsSearching]);
 
-  // Effect for handling debounced search
   useEffect(() => {
     if (debouncedSearch !== "") {
       filterProducts();
     }
   }, [debouncedSearch, filterProducts]);
 
-  // Effect for resetting when query is cleared
   useEffect(() => {
     if (query === "") {
       setFilteredItems(products);

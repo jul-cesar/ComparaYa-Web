@@ -24,6 +24,7 @@ const ErrorModal = ({ message, currentPage }) => {
                 setClose(true);
                 setNoResults(false);
                 setQuery("");
+                setCurrentCategory("");
               }}
               type="button"
               className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -70,7 +71,6 @@ const ErrorModal = ({ message, currentPage }) => {
                   setClose(true);
                   setNoResults(false);
                   setQuery("");
-                  getProductos(setProducts, setLoadingProducts, currentPage);
                   setCurrentCategory("");
                 }}
                 data-modal-hide="popup-modal"
