@@ -13,6 +13,8 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 
 import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
 import ErrorModal from "../components/ErrorModal";
+import ProductsLayout from "../layouts/ProductsLayout";
+import ProductsGrid from "../layouts/ProductsGrid";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,66 +43,22 @@ const ProductsPage = () => {
       <Navbar />
 
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
-      <div className="flex items-center justify-center">
-        {errorCats && <ErrorModal message={"Error cats"} />}
-      </div>
-      <div className="flex items-center justify-center">
-        {noResults && (
-          <ErrorModal
+
+      {errorCats && <ErrorModal message={"Error cats"} />}
+
+      {noResults && (
+        <ErrorModal
           currentPage={currentPage}
-            message={`no se han encontrado resultados para "${query}"`}
-          />
-        )}
+          message={`no se han encontrado resultados para "${query}"`}
+        />
+      )}
 
-        <Carrito />
-      </div>
+      <Carrito />
+      <ProductsLayout  currentPage={currentPage} setCurrentPage={setCurrentPage}>
+        <ProductsGrid Items={filteredItems}/>
+      </ProductsLayout>
+        
 
-      <div className="p-1 sm:p-5">
-        <div className="flex items-center justify-center">
-          <div className="flex-grow">
-            {/* <div className="fixed bottom-5 right-10 z-50">
-              {(!isAtTop && !openCarrito) && <TopButton />}
-            </div> */}
-
-            <div className="p-4 lg:ml-64">
-              {!noResults && (
-                <InfoHeader
-                  currentCategory={currentCategory}
-                  AllProducts={AllProducts}
-                  filteredItems={filteredItems}
-                />
-              )}
-              <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
-                {!loadingProducts && !loadingCategoryProducts && !errorCats ? (
-                  filteredItems.map((product, index) => {
-                    return (
-                      <CardProduct
-                        product={product}
-                        key={nanoid()}
-                        img={product.imagen_url}
-                        nombre={product.nombre}
-                        precio_exito={product.precio_exito}
-                        precio_olim={product.precio_olim}
-                        precio_d1={product.precio_d1}
-                      />
-                    );
-                  })
-                ) : (
-                  <ProductSkeleton />
-                )}
-              </ul>
-            </div>
-
-            {!isSearching && !currentCategory && (
-              <PaginationButton
-                click={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              />
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

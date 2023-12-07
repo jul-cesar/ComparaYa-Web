@@ -17,6 +17,7 @@ const Carrito = () => {
   const [parent, enableAnimations] = useAutoAnimate();
 
   return (
+    <div  className="flex items-center justify-center">
     <div
       id="default-modal"
       tabIndex="-1"
@@ -85,6 +86,7 @@ const Carrito = () => {
 
         {productsInCart.length !== 0 && <Total />}
       </div>
+    </div>
     </div>
   );
 };

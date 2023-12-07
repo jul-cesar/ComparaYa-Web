@@ -16,6 +16,7 @@ const InputSearch = () => {
     setQuery,
     query,
     noResults,
+    
   } = useContext(Products);
 
   const debouncedSearch = useDebounce(query);

@@ -10,7 +10,7 @@ export const getProductos = async (
 
   try {
     const response = await fetch(
-      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/${currentPage}/8`
+      `http://localhost:4000/productos/${currentPage}/8`
     );
     const fetchedProducts = await response.json();
     setProducts((PrevProducts) => PrevProducts.concat(fetchedProducts));
@@ -23,7 +23,7 @@ export const getProductos = async (
 
 export const getAllProductos = async (setAllProducts) => {
   try {
-    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/`);
+    const response = await fetch(`http://localhost:4000/productos`);
     const fetchedProducts = await response.json();
     setAllProducts(fetchedProducts);
   } catch (error) {
@@ -33,7 +33,7 @@ export const getAllProductos = async (setAllProducts) => {
 
 export const getCategories = async (setCategories) => {
   try {
-    const response = await fetch(`https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/categorias`);
+    const response = await fetch(`http://localhost:4000/categorias`);
     const fetchedCategories = await response.json();
     setCategories(fetchedCategories);
   } catch (error) {
@@ -51,7 +51,7 @@ export const getProductsByCategory = async (
   setLoadingCategoryProducts(true);
   try {
     const response = await fetch(
-      `https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/categoria/${category}`
+      `http://localhost:4000/productos/categoria/${category.id}`
     );
     const fetchedCategories = await response.json();
     setCurrentCategory(category.nombre);
