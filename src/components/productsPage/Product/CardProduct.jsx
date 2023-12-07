@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import { UseFormatPrice } from "../../../hooks/useFormatPrice";
-import { Products } from "../../../context/productsContext";
 
 import DistribuidoraTag from "../../DistribuidoraTag";
 
 import CartIcon from "./CartIcon";
 import LupaIcon from "./LupaIcon";
+import { SidebarContext } from "../../../context/sidebarContext";
 
 const CardProduct = React.memo(
   ({ img, nombre, precio_exito, precio_olim, precio_d1, product }) => {
-    const { productsInCart, setProductsInCart, products } =
-      useContext(Products);
+    const { productsInCart, setProductsInCart } = useContext(SidebarContext);
     const formattedExitoPrice = UseFormatPrice(precio_exito);
     const formattedOlimPrice = UseFormatPrice(precio_olim);
     const formattedD1Price = UseFormatPrice(precio_d1);
@@ -19,7 +18,7 @@ const CardProduct = React.memo(
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex flex-col items-center">
           <img
-          loading="lazy"
+            loading="lazy"
             className="object-cover sm:h-52 sm:w-48 m-4 h-[140px] w-36 rounded-t-lg max-w-full mb-2"
             src={img}
             alt={img}

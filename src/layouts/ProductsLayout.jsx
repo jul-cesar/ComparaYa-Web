@@ -1,19 +1,12 @@
-import React, { Children, useContext } from "react";
+import React, { useContext } from "react";
 import { Products } from "../context/productsContext";
 import InfoHeader from "../components/productsPage/Product/InfoHeader";
-import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
 import PaginationButton from "../components/productsPage/PaginationButton";
-import CardProduct from "../components/productsPage/Product/CardProduct";
-import { nanoid } from "nanoid";
+import { SidebarContext } from "../context/sidebarContext";
 
 const ProductsLayout = ({ currentPage, setCurrentPage, children }) => {
-  const {
-    AllProducts,
-    filteredItems,
-    isSearching,
-    currentCategory,
-    noResults,
-  } = useContext(Products);
+  const { AllProducts, filteredItems, isSearching } = useContext(Products);
+  const { currentCategory, noResults } = useContext(SidebarContext);
   return (
     <div className="p-1 sm:p-5">
       <div className="flex items-center justify-center">

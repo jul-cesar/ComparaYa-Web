@@ -3,6 +3,7 @@ import { Products } from "../../../context/productsContext";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { getAllProductos } from "../../../api/productsFetching";
 import { ScrollToTop } from "../../../utils/scrollTop";
+import { SidebarContext } from "../../../context/sidebarContext";
 
 const InputSearch = () => {
   const {
@@ -11,13 +12,9 @@ const InputSearch = () => {
     products,
     setAllProducts,
     setIsSearching,
-    setOpenSidebar,
-    setNoResults,
-    setQuery,
-    query,
-    noResults,
-    
   } = useContext(Products);
+  const { setOpenSidebar, setNoResults, setQuery, query, noResults } =
+    useContext(SidebarContext);
 
   const debouncedSearch = useDebounce(query);
 

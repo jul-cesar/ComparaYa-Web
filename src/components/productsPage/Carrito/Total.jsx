@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { Products } from "../../../context/productsContext";
 import { UseFormatPrice } from "../../../hooks/useFormatPrice";
+import {  SidebarContext } from "../../../context/sidebarContext";
 
 const Total = () => {
-  const { productsInCart } = useContext(Products);
+  const { productsInCart } = useContext(SidebarContext);
   const montoTotalD1 = productsInCart.reduce(
     (total, item) => total + item.precio_d1 * item.quantity,
     0

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 
-import logo from "../../media/logohd .png";
-import textlogo from "../../media/textlogo.png";
-import { Products } from "../../context/productsContext";
+import { SidebarContext } from "../../context/sidebarContext";
 
 function Navbar() {
   const [openMenuProfile, setOpenMenuProfile] = useState(false);
 
-  const { openSidebar, setOpenSidebar } = useContext(Products);
+  const { openSidebar, setOpenSidebar } = useContext(SidebarContext);
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -78,7 +76,10 @@ function Navbar() {
                 id="dropdown-user"
               >
                 <div className="px-4 py-3" role="none">
-                  <p className="text-sm text-gray-900 dark:text-white" role="none">
+                  <p
+                    className="text-sm text-gray-900 dark:text-white"
+                    role="none"
+                  >
                     Neil Sims
                   </p>
                   <p
