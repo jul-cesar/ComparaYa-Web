@@ -54,7 +54,7 @@ const CartIcon = ({ product, setProductsInCart, productsInCart }) => {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="file: h-[45px] w-[30px]  sm:h-[50px]  sm:w-[50px] dark:text-gray-300"
+        className="file: h-[45px] w-[30px]  sm:h-[50px]  sm:w-[50px]"
       >
         <path
           strokeLinecap="round"

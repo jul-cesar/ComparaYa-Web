@@ -8,8 +8,8 @@ import DropdownCategorias from "./DropdownCategorias";
 import { SidebarContext } from "../../../context/sidebarContext";
 
 const CategoriesSidebar = ({ setCurrentCategory }) => {
-  
-  const { setOpenCarrito, productsInCart, openSidebar } = useContext(SidebarContext);
+  const { setOpenCarrito, productsInCart, openSidebar } =
+    useContext(SidebarContext);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const CategoriesSidebar = ({ setCurrentCategory }) => {
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
           !openSidebar && "-translate-x-full"
-        } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+        } bg-white border-r border-gray-200 sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <div className="h-full px-3 pb-4 overflow-y-auto bg-white">
           <ul className="space-y-2 font-medium">
             <li>
               <InputSearch />

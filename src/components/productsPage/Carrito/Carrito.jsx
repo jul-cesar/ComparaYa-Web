@@ -28,17 +28,17 @@ const Carrito = () => {
         } items-center justify-center fixed top-0 bottom-0 right-0 p-4 left-0 z-50 w-full h-full bg-black bg-opacity-50`}
       >
         <div
-          className="relative bg-white rounded-lg  flex-col sm:block sm:items-center flex shadow dark:bg-gray-700 w-screen max-w-2xl max-h-[500px] overflow-y-auto overflow-x-hidden"
+          className="relative bg-white rounded-lg  flex-col sm:block sm:items-center flex shadow w-screen max-w-2xl max-h-[500px] overflow-y-auto overflow-x-hidden"
           ref={parent}
         >
-          <div className="flex  items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="flex  items-center justify-between p-4 md:p-5 border-b rounded-t">
+            <h3 className="text-xl font-semibold text-gray-900 ">
               Carrito de compras
             </h3>
             <button
               onClick={() => setOpenCarrito(false)}
               type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
               data-modal-hide="default-modal"
             >
               <svg
@@ -62,7 +62,7 @@ const Carrito = () => {
 
           {productsInCart.length === 0 && (
             <div className="flex flex-col justify-center items-center p-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold text-gray-900">
                 Carrito vacio, agrega productos
               </h2>
               <Lottie animationData={empty} className="h-[360px] w-[400px]" />

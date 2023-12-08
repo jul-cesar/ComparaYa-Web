@@ -7,6 +7,7 @@ export const ProductsFunction = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [ComparationItems, setComparationItems] = useState([]);
   const [AllProducts, setAllProducts] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -23,6 +24,8 @@ export const ProductsFunction = ({ children }) => {
         setAllProducts,
         isSearching,
         setIsSearching,
+        setComparationItems,
+        ComparationItems
       }}
     >
       {children}

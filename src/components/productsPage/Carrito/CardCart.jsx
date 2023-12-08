@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { UseFormatPrice } from "../../../hooks/useFormatPrice";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import DistribuidoraTag from "../../DistribuidoraTag";
+import Lottie from "lottie-react";
+import imgload from "../../../media/imgload.json";
 
 const CardCart = ({
   img,
@@ -37,15 +39,27 @@ const CardCart = ({
     );
   };
 
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className="flex flex-row p-3 over   md:p-5 space-y-4">
       <div className="rounded-lg md:w-screen">
         <div className="justify-between items-center flex flex-col mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img
-            src={img}
-            alt="product-image"
-            className=" object-cover h-48 w-48 rounded-t-lg max-w-full align-middle italic bg-no-repeat bg-cover ms"
-          />
+          {!imgError ? (
+            <img
+              src={img}
+              onError={() => {
+                setImgError(true);
+              }}
+              alt="product-image"
+              className=" object-cover h-48 w-48 rounded-t-lg max-w-full align-middle italic bg-no-repeat bg-cover ms"
+            />
+          ) : (
+            <Lottie
+              animationData={imgload}
+              className="object-cover sm:h-52 sm:w-48 m-4 h-[140px] w-36 rounded-t-lg max-w-full mb-2"
+            />
+          )}
           <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div className="mt-5 sm:mt-0">
               <h2 className="text-lg font-bold text-gray-900">{name}</h2>

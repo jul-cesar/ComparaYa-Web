@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { getComparations } from "../../../api/productsFetching";
+import { Products } from "../../../context/productsContext";
 
 
-const LupaIcon = () => {
+const LupaIcon = ({product}) => {
+  const {setComparationItems} = useContext(Products)
   return (
-    <div>
-     
+    <div onClick={()=>getComparations(product, setComparationItems)}>
+      XD
     </div>
   );
 };
