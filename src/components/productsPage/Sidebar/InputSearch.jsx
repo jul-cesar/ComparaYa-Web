@@ -1,25 +1,22 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { Products } from "../../../context/productsContext";
 import { useDebounce } from "../../../hooks/useDebounce";
-import { getAllProductos } from "../../../api/productsFetching";
 import { ScrollToTop } from "../../../utils/scrollTop";
 import { SidebarContext } from "../../../context/sidebarContext";
+import { useProductos } from "../../../hooks/api/useProductos";
 
 const InputSearch = () => {
-  const {
-    AllProducts,
-    setFilteredItems,
-    products,
-    setAllProducts,
-    setIsSearching,
-  } = useContext(Products);
+  const { setFilteredItems, products, setAllProducts, setIsSearching } =
+    useContext(Products);
   const { setOpenSidebar, setNoResults, setQuery, query, noResults } =
     useContext(SidebarContext);
+
+  const { getAllProductos, AllProducts } = useProductos();
 
   const debouncedSearch = useDebounce(query);
 
   useEffect(() => {
-    getAllProductos(setAllProducts);
+    getAllProductos();
   }, []);
 
   const filterProducts = useCallback(() => {

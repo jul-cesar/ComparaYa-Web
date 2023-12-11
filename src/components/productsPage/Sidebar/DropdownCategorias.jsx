@@ -1,19 +1,16 @@
 import React, { useContext, useState } from "react";
-import { Products } from "../../../context/productsContext";
+
 import OpenDropdownButton from "./OpenDropdownButton";
-import {
-  getProductos,
-  getProductsByCategory,
-} from "../../../api/productsFetching";
 import { ScrollToTop } from "../../../utils/scrollTop";
 import { SidebarContext } from "../../../context/sidebarContext";
+import { useProductosPaginados } from "../../../hooks/api/useProductosPaginados";
+import { useProductosCategory } from "../../../hooks/api/useProductosCategory";
 
 const DropdownCategorias = ({ categories, setCurrentCategory }) => {
   const [openCategories, setOpenCategories] = useState(false);
-  const { setProducts, setFilteredItems, setLoadingProducts } =
-    useContext(Products);
-  const { setOpenSidebar, setLoadingCategoryProducts, setErrorCats } =
-    useContext(SidebarContext);
+  const { setOpenSidebar } = useContext(SidebarContext);
+  const { fetchProductsPaginados } = useProductosPaginados();
+  const { getProductsByCategory } = useProductosCategory();
   return (
     <>
       <OpenDropdownButton
@@ -27,7 +24,7 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
         <li>
           <a
             onClick={() => {
-              getProductos(setProducts, setLoadingProducts, 1);
+              fetchProductsPaginados(1);
               setCurrentCategory("");
               setOpenSidebar(false);
               ScrollToTop();
@@ -41,13 +38,7 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
           <li key={categorie.id}>
             <a
               onClick={() => {
-                getProductsByCategory(
-                  setFilteredItems,
-                  categorie,
-                  setLoadingCategoryProducts,
-                  setErrorCats,
-                  setCurrentCategory
-                );
+                getProductsByCategory(categorie);
                 setOpenSidebar(false);
               }}
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 cursor-pointer"

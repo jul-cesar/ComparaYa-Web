@@ -1,19 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { getCategories } from "../../../api/productsFetching";
-import { Products } from "../../../context/productsContext";
 import InputSearch from "./InputSearch";
 import SidebarOption from "./SidebarOption";
 import DropdownCategorias from "./DropdownCategorias";
 import { SidebarContext } from "../../../context/sidebarContext";
+import { useCategories } from "../../../hooks/api/useCategories";
 
 const CategoriesSidebar = ({ setCurrentCategory }) => {
   const { setOpenCarrito, productsInCart, openSidebar } =
     useContext(SidebarContext);
-  const [categories, setCategories] = useState([]);
+  const { categories, getCategories } = useCategories();
 
   useEffect(() => {
-    getCategories(setCategories);
+    getCategories();
   }, []);
 
   return (

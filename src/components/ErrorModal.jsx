@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Products } from "../context/productsContext";
-import { getProductos } from "../api/productsFetching";
+
 import { SidebarContext } from "../context/sidebarContext";
 
 const ErrorModal = ({ message, currentPage }) => {
   const [close, setClose] = useState(false);
   const { setNoResults, setQuery, setCurrentCategory } =
     useContext(SidebarContext);
-  const { setLoadingProducts, setProducts } = useContext(Products);
+
   return (
     <div className="flex items-center justify-center">
       <div

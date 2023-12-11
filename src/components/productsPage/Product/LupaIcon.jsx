@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { getComparations } from "../../../api/productsFetching";
-import { Products } from "../../../context/productsContext";
 
+import { Link } from "react-router-dom";
 
-const LupaIcon = ({product}) => {
-  const {setComparationItems} = useContext(Products)
+const LupaIcon = ({ product }) => {
   return (
-    <div onClick={()=>getComparations(product, setComparationItems)}>
-      XD
-    </div>
+    <Link to={`/product/comparation/${product.id}`}>
+      <div>XD</div>
+    </Link>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { memo, useContext, useEffect, useState } from "react";
-import { Products } from "../context/productsContext";
-import { getProductos } from "../api/productsFetching";
+
 import Navbar from "../components/productsPage/Navbar";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import Carrito from "../components/productsPage/Carrito/Carrito";
@@ -8,17 +7,20 @@ import ErrorModal from "../components/ErrorModal";
 import ProductsLayout from "../layouts/ProductsLayout";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { SidebarContext } from "../context/sidebarContext";
+import { useProductosPaginados } from "../hooks/api/useProductosPaginados";
+import { Products } from "../context/productsContext";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { setProducts, setLoadingProducts, filteredItems } =
-    useContext(Products);
 
-  const { setCurrentCategory, noResults, query, errorCats } =
-    useContext(SidebarContext);
+  const {fetchProductosPaginados } = useProductosPaginados();
+
+  const { setCurrentCategory, noResults, query, errorCats } = useContext(SidebarContext);
+
+  const { filteredItems } = useContext(Products);
 
   useEffect(() => {
-    getProductos(setProducts, setLoadingProducts, currentPage);
+    fetchProductosPaginados(currentPage);
   }, [currentPage]);
 
   return (
