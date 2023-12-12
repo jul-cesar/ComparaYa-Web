@@ -12,7 +12,7 @@ export const useProductosPaginados = () => {
         `http://localhost:4000/productos/${currentPage}/8`
       );
       const fetchedProducts = await response.json();
-      setProducts((prevProducts) => prevProducts.concat(fetchedProducts));
+      setProducts((prevProducts) => [...prevProducts, ...fetchedProducts]);
     } catch (error) {
       console.error("Failed to fetch products:", error);
     } finally {

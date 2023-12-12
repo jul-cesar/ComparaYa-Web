@@ -65,7 +65,7 @@ const CardProduct = React.memo(
                 </span>
               )}
             </div>
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col justify-center  items-center ">
               <CartIcon
                 product={product}
                 setProductsInCart={setProductsInCart}

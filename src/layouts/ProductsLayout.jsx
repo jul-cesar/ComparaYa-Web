@@ -21,14 +21,6 @@ const ProductsLayout = ({ currentPage, setCurrentPage, children }) => {
             )}
             {children}
           </div>
-
-          {!isSearching && !currentCategory && (
-            <PaginationButton
-              click={() => {
-                setCurrentPage(currentPage + 1);
-              }}
-            />
-          )}
         </div>
       </div>
     </div>

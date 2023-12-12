@@ -13,15 +13,29 @@ import { Products } from "../context/productsContext";
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const {fetchProductosPaginados } = useProductosPaginados();
+  const { fetchProductosPaginados } = useProductosPaginados();
 
-  const { setCurrentCategory, noResults, query, errorCats } = useContext(SidebarContext);
+  const { setCurrentCategory, noResults, query, errorCats } =
+    useContext(SidebarContext);
 
   const { filteredItems } = useContext(Products);
+
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
 
   useEffect(() => {
     fetchProductosPaginados(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="flex flex-col  min-h-screen justify-center">

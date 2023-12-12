@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import ProductsLayout from "../layouts/ProductsLayout";
+import Navbar from "../components/productsPage/Navbar";
 
 const ComparationPage = () => {
   const { idf } = useParams();
@@ -47,14 +48,14 @@ const ComparationPage = () => {
 
   if (ComparationItems.length < 1) {
     return (
-      <div className="flex items-center justify-center w-screen h-screen">
+      <div className="flex flex-col items-center justify-center w-screen h-screen gap-4">
         <div
           className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
-        >
-          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-            Loading...
-          </span>
+        />
+
+        <div className="px-3 py-1 text-lg font-medium leading-none text-center bg-gray-700-200  animate-pulse">
+          Buscando...
         </div>
       </div>
     );
@@ -62,18 +63,17 @@ const ComparationPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        {ComparationItems.mostSimilarProducts?.map((p) => (
-          <ProductsGrid key={"comp" + p.id} Items={[p]} />
-        ))}
-      </div>
-
+     <Navbar/>s
+    <div className="p-1 sm:p-5">
+     
       <h1 className="p-10 text-lg">Iguales</h1>
-      <div className="flex items-center justify-center">
-        {ComparationItems.alikeProducts?.map((p) => (
-          <ProductsGrid key={p.id} Items={[p]} />
-        ))}
-      </div>
+
+      <ProductsGrid Items={ComparationItems.mostSimilarProducts} />
+
+      <h1 className="p-10 text-lg">Parecidos</h1>
+
+      <ProductsGrid Items={ComparationItems.alikeProducts} />
+    </div>
     </>
   );
 };

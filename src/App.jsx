@@ -14,10 +14,12 @@ function App() {
         <SidebarFunction>
           <Routes>
             <Route path="/" element={<ProductsPage />} />
-            <Route path="/product/comparation/:idf" element={<ComparationPage/>} />
+            <Route
+              path="/product/comparation/:idf"
+              element={<ComparationPage />}
+            />
           </Routes>
         </SidebarFunction>
-
       </div>
       <Toaster richColors />
     </ProductsFunction>
