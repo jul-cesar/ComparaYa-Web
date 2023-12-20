@@ -9,7 +9,7 @@ export const useProductosPaginados = () => {
     setLoadingProducts(true);
     try {
       const response = await fetch(
-        `http://localhost:4000/productos/${currentPage}/8`
+        `https://api-compara-ya-jul-cesars-projects.vercel.app/productos/${currentPage}/8`
       );
       const fetchedProducts = await response.json();
       setProducts((prevProducts) => [...prevProducts, ...fetchedProducts]);

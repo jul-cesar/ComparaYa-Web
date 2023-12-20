@@ -12,7 +12,7 @@ export const useProductosCategory = () => {
     setLoadingCategoryProducts(true);
     try {
       const response = await fetch(
-        `http://localhost:4000/productos/categoria/${category.id}`
+        `https://api-compara-ya-jul-cesars-projects.vercel.app/productos/categoria/${category.id}`
       );
       const fetchedCategories = await response.json();
       setCurrentCategory(category.nombre);

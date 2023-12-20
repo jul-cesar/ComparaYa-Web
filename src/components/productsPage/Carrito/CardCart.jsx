@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UseFormatPrice } from "../../../hooks/useFormatPrice";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+
 import DistribuidoraTag from "../../DistribuidoraTag";
 import Lottie from "lottie-react";
 import imgload from "../../../media/imgload.json";

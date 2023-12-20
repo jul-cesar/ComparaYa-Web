@@ -6,7 +6,7 @@ export const useProductos = () => {
 
   const getAllProductos = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/productos`);
+      const response = await fetch(`https://api-compara-ya-jul-cesars-projects.vercel.app/productos`);
       const fetchedProducts = await response.json();
       setAllProducts(fetchedProducts);
     } catch (error) {

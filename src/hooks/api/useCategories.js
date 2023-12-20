@@ -4,7 +4,7 @@ export const useCategories = () => {
   const [categories, setCategories] = useState([]);
   const getCategories = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/categorias`);
+      const response = await fetch(`https://api-compara-ya-jul-cesars-projects.vercel.app/categorias`);
       const fetchedCategories = await response.json();
       setCategories(fetchedCategories);
     } catch (error) {

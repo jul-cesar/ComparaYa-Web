@@ -2,10 +2,9 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Products } from "../context/productsContext";
 import ProductsGrid from "../layouts/ProductsGrid";
-import { nanoid } from "nanoid";
+
 import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
-import ProductsLayout from "../layouts/ProductsLayout";
 import Navbar from "../components/productsPage/Navbar";
 
 const ComparationPage = () => {
@@ -17,6 +16,7 @@ const ComparationPage = () => {
 
   const { getAllProductos } = useProductos();
   const { getComparations } = useComparations();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -63,17 +63,16 @@ const ComparationPage = () => {
 
   return (
     <>
-     <Navbar/>s
-    <div className="p-1 sm:p-5">
-     
-      <h1 className="p-10 text-lg">Iguales</h1>
+      <Navbar />s
+      <div className="p-1 sm:p-5">
+        <h1 className="p-10 text-lg">Iguales</h1>
 
-      <ProductsGrid Items={ComparationItems.mostSimilarProducts} />
+        <ProductsGrid Items={ComparationItems.mostSimilarProducts} />
 
-      <h1 className="p-10 text-lg">Parecidos</h1>
+        <h1 className="p-10 text-lg">Parecidos</h1>
 
-      <ProductsGrid Items={ComparationItems.alikeProducts} />
-    </div>
+        <ProductsGrid Items={ComparationItems.alikeProducts} />
+      </div>
     </>
   );
 };

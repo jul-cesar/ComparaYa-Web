@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { Products } from "../context/productsContext";
+import { useEffect, useState } from "react";
 
 export const useDebounce = (value, delay = 1000) => {
   const [debouncedValue, setDebouncedValue] = useState(value);

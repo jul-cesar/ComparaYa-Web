@@ -4,7 +4,7 @@ import { ProductsFunction } from "./context/productsContext.jsx";
 import { Route, Routes } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { SidebarFunction } from "./context/sidebarContext.jsx";
-import ComparationPage from "./pages/comparationPage.jsx";
+import ComparationPage from "./pages/ComparationPage.jsx";
 
 function App() {
   return (
