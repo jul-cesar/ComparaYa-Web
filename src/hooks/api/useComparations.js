@@ -6,7 +6,7 @@ export const useComparations = () => {
 
   const getComparations = async (product) => {
     try {
-      const response = await fetch("https://localhost:7231/compare", {
+      const response = await fetch("http://www.comparaya.somee.com/compare", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
