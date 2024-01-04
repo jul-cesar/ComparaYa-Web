@@ -12,6 +12,7 @@ import { Products } from "../context/productsContext";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isFetching, setIsFetching] = useState(false);
 
   const { fetchProductosPaginados } = useProductosPaginados();
 
@@ -22,16 +23,21 @@ const ProductsPage = () => {
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    const bottomThreshold = 700;
 
-    if (scrollTop + clientHeight >= scrollHeight) {
+    if (
+      scrollTop + clientHeight + bottomThreshold >= scrollHeight &&
+      !isFetching
+    ) {
+      setIsFetching(true);
       setCurrentPage((prev) => prev + 1);
     }
   };
-
   useEffect(() => {
-    fetchProductosPaginados(currentPage);
+    if (query === "") {
+      fetchProductosPaginados(currentPage).finally(() => setIsFetching(false));
+    }
   }, [currentPage]);
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
