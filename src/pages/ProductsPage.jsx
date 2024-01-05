@@ -12,6 +12,7 @@ import { Products } from "../context/productsContext";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const [isFetching, setIsFetching] = useState(false);
 
   const { fetchProductosPaginados } = useProductosPaginados();
@@ -33,11 +34,13 @@ const ProductsPage = () => {
       setCurrentPage((prev) => prev + 1);
     }
   };
+
   useEffect(() => {
     if (query === "") {
       fetchProductosPaginados(currentPage).finally(() => setIsFetching(false));
     }
   }, [currentPage]);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
