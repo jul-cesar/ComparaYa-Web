@@ -1,15 +1,18 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Products } from "../context/productsContext";
 import ProductsGrid from "../layouts/ProductsGrid";
 
 import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import Navbar from "../components/productsPage/Navbar";
+import CardProduct from "../components/productsPage/Product/CardProduct";
+import { nanoid } from "nanoid";
 
 const ComparationPage = () => {
   const { idf } = useParams();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { setComparationItems, ComparationItems, setAllProducts, AllProducts } =
     useContext(Products);
@@ -63,13 +66,41 @@ const ComparationPage = () => {
 
   return (
     <>
-      <Navbar />s
+      <Navbar />
+
+      <h1 className="mt-16 p-4" onClick={() => navigate(-1)}>
+        Go Back
+      </h1>
+
       <div className="p-1 sm:p-5">
-        <h1 className="p-10 text-lg">Iguales</h1>
-
-        <ProductsGrid Items={ComparationItems.mostSimilarProducts} />
-
-        <h1 className="p-10 text-lg">Parecidos</h1>
+        <h1 className="p-5 text-lg">Productos similares a: </h1>
+        <div className="flex">
+          <div>
+            <CardProduct
+              {...ComparationItems.mostSimilarProducts[0]}
+              img={ComparationItems.mostSimilarProducts[0].imagen_url}
+              product={ComparationItems.mostSimilarProducts[0]}
+            />
+          </div>
+          <div>
+            {ComparationItems.mostSimilarProducts.slice(1).map((product) => {
+              return (
+                <div className="flex-colm">
+                  <CardProduct
+                    product={product}
+                    key={nanoid()}
+                    img={product.imagen_url}
+                    nombre={product.nombre}
+                    precio_exito={product.precio_exito}
+                    precio_olim={product.precio_olim}
+                    precio_d1={product.precio_d1}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <h1 className="p-5 text-lg">Tambien te puede interesar: </h1>
 
         <ProductsGrid Items={ComparationItems.alikeProducts} />
       </div>

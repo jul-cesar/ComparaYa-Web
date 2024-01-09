@@ -5,6 +5,7 @@ import { ScrollToTop } from "../../../utils/scrollTop";
 import { SidebarContext } from "../../../context/sidebarContext";
 import { useProductosPaginados } from "../../../hooks/api/useProductosPaginados";
 import { useProductosCategory } from "../../../hooks/api/useProductosCategory";
+import { Link } from "react-router-dom";
 
 const DropdownCategorias = ({ categories, setCurrentCategory }) => {
   const [openCategories, setOpenCategories] = useState(false);
@@ -21,30 +22,18 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
         id="dropdown-example"
         className={`${openCategories ? "block" : "hidden"} py-2 space-y-2`}
       >
-        <li>
-          <a
-            onClick={() => {
-              fetchProductsPaginados(1);
-              setCurrentCategory("");
-              setOpenSidebar(false);
-              ScrollToTop();
-            }}
-            className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100cursor-pointer"
-          >
-            Todos
-          </a>
-        </li>
+       
         {categories.map((categorie) => (
           <li key={categorie.id}>
-            <a
+            <Link
+              to={`/categories/${categorie.nombre}`}
               onClick={() => {
-                getProductsByCategory(categorie);
                 setOpenSidebar(false);
               }}
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 cursor-pointer"
             >
               {categorie.nombre}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { Products } from "../context/productsContext";
 import InfoHeader from "../components/productsPage/Product/InfoHeader";
-import PaginationButton from "../components/productsPage/PaginationButton";
 import { SidebarContext } from "../context/sidebarContext";
 
-const ProductsLayout = ({ currentPage, setCurrentPage, children }) => {
+const ProductsLayout = ({ children, currentItems }) => {
   const { AllProducts, filteredItems, isSearching } = useContext(Products);
   const { currentCategory, noResults } = useContext(SidebarContext);
   return (
@@ -16,7 +15,7 @@ const ProductsLayout = ({ currentPage, setCurrentPage, children }) => {
               <InfoHeader
                 currentCategory={currentCategory}
                 AllProducts={AllProducts}
-                filteredItems={filteredItems}
+                currentItems={currentItems}
               />
             )}
             {children}

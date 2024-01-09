@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { SidebarFunction } from "./context/sidebarContext.jsx";
 import ComparationPage from "./pages/ComparationPage.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             <Route
               path="/product/comparation/:idf"
               element={<ComparationPage />}
+            />
+              <Route
+              path="/categories/:categ"
+              element={<CategoriesPage />}
             />
           </Routes>
         </SidebarFunction>
