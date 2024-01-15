@@ -6,6 +6,7 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 import { useParams } from "react-router-dom";
 import { useProductosCategory } from "../hooks/api/useProductosCategory";
 import { useGetCategory } from "../hooks/api/useGetCategory";
+import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 
 const CategoriesPage = () => {
   const [curPage, setCurPage] = useState(1);
@@ -55,9 +56,10 @@ const CategoriesPage = () => {
   return (
     <div className="flex flex-col min-h-screen justify-center">
       <Navbar />
+      <CategoriesSidebar/>
       <Carrito />
-      <ProductsLayout currentItems={productsCategory.length}>
-        <ProductsGrid Items={productsCategory} />
+      <ProductsLayout>
+        <ProductsGrid Items={productsCategory}  currentItems={productsCategory.length}/>
       </ProductsLayout>
     </div>
   );

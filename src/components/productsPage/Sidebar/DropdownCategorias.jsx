@@ -26,7 +26,7 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
         {categories.map((categorie) => (
           <li key={categorie.id}>
             <Link
-              to={`/categories/${categorie.nombre}`}
+            reloadDocument to={`/categories/${categorie.nombre}`}
               onClick={() => {
                 setOpenSidebar(false);
               }}
