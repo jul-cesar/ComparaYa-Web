@@ -1,8 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Products } from "../context/productsContext";
 import ProductsGrid from "../layouts/ProductsGrid";
-
 import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import Navbar from "../components/productsPage/Navbar";
@@ -56,7 +55,6 @@ const ComparationPage = () => {
           className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
         />
-
         <div className="px-3 py-1 text-lg font-medium leading-none text-center bg-gray-700-200  animate-pulse">
           Buscando...
         </div>
@@ -67,41 +65,35 @@ const ComparationPage = () => {
   return (
     <>
       <Navbar />
+      <div className="p-3">
+      <svg
+       onClick={() => navigate(-1)}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="h-8 w-8 mt-16">
+          <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
 
-      <h1 className="mt-16 p-4" onClick={() => navigate(-1)}>
-        Go Back
-      </h1>
-
-      <div className="p-1 sm:p-5">
-        <h1 className="p-5 text-lg">Productos similares a: </h1>
-        <div className="flex">
+        <div>
           <div>
-            <CardProduct
-              {...ComparationItems.mostSimilarProducts[0]}
-              img={ComparationItems.mostSimilarProducts[0].imagen_url}
-              product={ComparationItems.mostSimilarProducts[0]}
-            />
-          </div>
-          <div>
-            {ComparationItems.mostSimilarProducts.slice(1).map((product) => {
-              return (
-                <div className="flex-colm">
-                  <CardProduct
-                    product={product}
-                    key={nanoid()}
-                    img={product.imagen_url}
-                    nombre={product.nombre}
-                    precio_exito={product.precio_exito}
-                    precio_olim={product.precio_olim}
-                    precio_d1={product.precio_d1}
-                  />
-                </div>
-              );
-            })}
+            <h1 className="text-lg m-4">Productos Similares:</h1>
+            {ComparationItems.mostSimilarProducts.slice(1).length > 0 ? (
+              <ProductsGrid
+                Items={ComparationItems.mostSimilarProducts.slice(1)}
+              />
+            ) : (
+              <h1 className="text-center text-sm text-black">No se encontraron productos similares</h1>
+            )}
           </div>
         </div>
-        <h1 className="p-5 text-lg">Tambien te puede interesar: </h1>
 
+        <h1 className="text-lg m-4">También te puede interesar:</h1>
         <ProductsGrid Items={ComparationItems.alikeProducts} />
       </div>
     </>

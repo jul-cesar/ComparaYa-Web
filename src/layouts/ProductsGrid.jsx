@@ -6,19 +6,9 @@ import { Products } from "../context/productsContext";
 import { SidebarContext } from "../context/sidebarContext";
 import InfoHeader from "../components/productsPage/Product/InfoHeader";
 
-const ProductsGrid = ({ Items, currentItems }) => {
-  const { AllProducts, filteredItems, isSearchingl, loadingProducts } =
-    useContext(Products);
-  const { currentCategory, noResults } = useContext(SidebarContext);
+const ProductsGrid = ({ Items }) => {
   return (
     <>
-      {!loadingProducts && (
-        <InfoHeader
-          currentCategory={currentCategory}
-          AllProducts={AllProducts}
-          currentItems={currentItems}
-        />
-      )}
       <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8  content-center">
         {Items.map((product, index) => {
           return (
@@ -34,7 +24,6 @@ const ProductsGrid = ({ Items, currentItems }) => {
           );
         })}
       </ul>
-    
     </>
   );
 };

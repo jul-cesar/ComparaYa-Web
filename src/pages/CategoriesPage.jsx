@@ -58,8 +58,8 @@ const CategoriesPage = () => {
       <Navbar />
       <CategoriesSidebar/>
       <Carrito />
-      <ProductsLayout>
-        <ProductsGrid Items={productsCategory}  currentItems={productsCategory.length}/>
+      <ProductsLayout  currentItems={productsCategory.length}>
+        <ProductsGrid Items={productsCategory} />
       </ProductsLayout>
     </div>
   );
