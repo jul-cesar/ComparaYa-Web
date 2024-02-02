@@ -1,8 +1,8 @@
 import React from "react";
 
 const ProductSkeleton = () => {
-  return Array.from({ length: 500 }, (_, index) => (
-    <div className="flex min-h-full items-center justify-center p-4" key={index}>
+  return Array.from({ length: 50 }, (_, index) => (
+    <div className="flex min-h-full items-center justify-center p-4 mt-6" key={index}>
       <div className="w-full">
         <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
           <div className="h-64 bg-gray-300"></div>

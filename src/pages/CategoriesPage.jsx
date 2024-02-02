@@ -7,17 +7,17 @@ import { useParams } from "react-router-dom";
 import { useProductosCategory } from "../hooks/api/useProductosCategory";
 import { useGetCategory } from "../hooks/api/useGetCategory";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
+import { Products } from "../context/productsContext";
 
 const CategoriesPage = () => {
   const [curPage, setCurPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
-
+  const { isSearching } = useContext(Products);
+  console.log(isSearching);
   const { categ } = useParams();
   const { getCategory, category } = useGetCategory();
-  const { productsCategory, fetchProductsByCategory } = useProductosCategory(
-    category,
-    curPage
-  );
+  const { productsCategory, fetchProductsByCategory, setProductsCategory } =
+    useProductosCategory(category, curPage);
   console.log(curPage);
 
   useEffect(() => {
@@ -34,7 +34,9 @@ const CategoriesPage = () => {
   };
 
   useEffect(() => {
-    fetchProductsByCategory();
+    if (isSearching) {
+      fetchProductsByCategory();
+    }
   }, [curPage]);
 
   useEffect(() => {
@@ -56,9 +58,9 @@ const CategoriesPage = () => {
   return (
     <div className="flex flex-col min-h-screen justify-center">
       <Navbar />
-      <CategoriesSidebar/>
+      <CategoriesSidebar setCurrentItems={setProductsCategory} />
       <Carrito />
-      <ProductsLayout  currentItems={productsCategory.length}>
+      <ProductsLayout currentItems={productsCategory.length}>
         <ProductsGrid Items={productsCategory} />
       </ProductsLayout>
     </div>

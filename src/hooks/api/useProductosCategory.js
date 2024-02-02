@@ -40,6 +40,7 @@ export const useProductosCategory = (initialCategory, curPage) => {
 
   return {
     productsCategory,
+    setProductsCategory,
     errorCats,
     fetchProductsByCategory,
   };

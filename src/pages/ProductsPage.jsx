@@ -15,12 +15,12 @@ const ProductsPage = () => {
 
   const [isFetching, setIsFetching] = useState(false);
 
-  const { fetchProductosPaginados } = useProductosPaginados();
+  const { fetchProductosPaginados, products } = useProductosPaginados();
 
   const { setCurrentCategory, noResults, query, errorCats } =
     useContext(SidebarContext);
 
-  const { filteredItems } = useContext(Products);
+  const { filteredItems, setFilteredItems } = useContext(Products);
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -50,7 +50,7 @@ const ProductsPage = () => {
     <div className="flex flex-col  min-h-screen justify-center">
       <Navbar />
 
-      <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
+      <CategoriesSidebar setCurrentCategory={setCurrentCategory}  />
 
       {errorCats && <ErrorModal message={"Error cats"} />}
       {noResults && (
@@ -63,7 +63,7 @@ const ProductsPage = () => {
       <Carrito />
 
       <ProductsLayout currentPage={currentPage} setCurrentPage={setCurrentPage}>
-        <ProductsGrid Items={filteredItems} />
+        <ProductsGrid Items={products} />
       </ProductsLayout>
     </div>
   );

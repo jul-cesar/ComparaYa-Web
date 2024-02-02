@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoHeader = ({ currentCategory, AllProducts, currentItems }) => {
   return (
-    <div className="flex flex-row pt-2 pb-2 sm:p-4 border-b-2 justify-between items-center border-gray-800 shadow-sm mt-14 mb-6 mx-2 sm:flex  sm:justify-between">
+    <div className="flex flex-row pt-1 pb-2 sm:p-4 border-b-2 justify-between items-center border-gray-800 shadow-sm mt-12 mb-6 mx-2 sm:flex  sm:justify-between">
       <div className="sm:mb-0">
         <p className="text-sm font-semibold text-gray-800 sm:text-lg">
           Categoria:{" "}

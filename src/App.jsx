@@ -6,6 +6,10 @@ import { Toaster, toast } from "sonner";
 import { SidebarFunction } from "./context/sidebarContext.jsx";
 import ComparationPage from "./pages/ComparationPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
+import LogIn from "./components/auth/LogIn.jsx";
+import SignUp from "./components/auth/SignUp.jsx";
+import SearchResultsPage from "./pages/searchResultsPage.jsx";
+
 
 function App() {
   return (
@@ -19,10 +23,10 @@ function App() {
               path="/product/comparation/:idf"
               element={<ComparationPage />}
             />
-              <Route
-              path="/categories/:categ"
-              element={<CategoriesPage />}
-            />
+            <Route path="/categories/:categ" element={<CategoriesPage />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/search/:squery" element={<SearchResultsPage />} />
           </Routes>
         </SidebarFunction>
       </div>

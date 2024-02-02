@@ -1,55 +1,20 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Products } from "../../../context/productsContext";
-import { useDebounce } from "../../../hooks/useDebounce";
-import { ScrollToTop } from "../../../utils/scrollTop";
+import React, { useContext } from "react";
+
 import { SidebarContext } from "../../../context/sidebarContext";
-import { useProductos } from "../../../hooks/api/useProductos";
+
+import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
-  const { setFilteredItems, products, setAllProducts, setIsSearching } =
-    useContext(Products);
-  const { setOpenSidebar, setNoResults, setQuery, query, noResults } =
-    useContext(SidebarContext);
+  const { setQuery, query, noResults } = useContext(SidebarContext);
+  const navigate = useNavigate();
 
-  const { getAllProductos, AllProducts } = useProductos();
-
-  const debouncedSearch = useDebounce(query);
-
-  useEffect(() => {
-    getAllProductos();
-  }, []);
-
-  const filterProducts = useCallback(() => {
-    const filtered = AllProducts.filter((p) =>
-      p.nombre
-        .toString()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .includes(debouncedSearch.toLowerCase())
-    );
-    filtered.length < 1 && setNoResults(true);
-    ScrollToTop();
-    setFilteredItems(filtered);
-    setIsSearching(true);
-    setOpenSidebar(false);
-  }, [AllProducts, debouncedSearch, setFilteredItems, setIsSearching]);
-
-  useEffect(() => {
-    if (debouncedSearch !== "") {
-      filterProducts();
-    }
-  }, [debouncedSearch, filterProducts]);
-
-  useEffect(() => {
-    if (query === "") {
-      setFilteredItems(products);
-      setIsSearching(false);
-    }
-  }, [query, products, setFilteredItems, setIsSearching]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${query}`);
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg

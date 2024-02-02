@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import OpenDropdownButton from "./OpenDropdownButton";
-import { ScrollToTop } from "../../../utils/scrollTop";
+
 import { SidebarContext } from "../../../context/sidebarContext";
 import { useProductosPaginados } from "../../../hooks/api/useProductosPaginados";
 import { useProductosCategory } from "../../../hooks/api/useProductosCategory";
@@ -22,11 +22,11 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
         id="dropdown-example"
         className={`${openCategories ? "block" : "hidden"} py-2 space-y-2`}
       >
-       
         {categories.map((categorie) => (
           <li key={categorie.id}>
             <Link
-            reloadDocument to={`/categories/${categorie.nombre}`}
+              reloadDocument
+              to={`/categories/${categorie.nombre}`}
               onClick={() => {
                 setOpenSidebar(false);
               }}
