@@ -11,6 +11,7 @@ import SignUp from "./components/auth/SignUp.jsx";
 import SearchResultsPage from "./pages/searchResultsPage.jsx";
 
 
+
 function App() {
   return (
     <ProductsFunction>
