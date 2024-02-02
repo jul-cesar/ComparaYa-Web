@@ -8,7 +8,7 @@ import ComparationPage from "./pages/ComparationPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import LogIn from "./components/auth/LogIn.jsx";
 import SignUp from "./components/auth/SignUp.jsx";
-import SearchResultsPage from "./pages/searchResultsPage.jsx";
+import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 
 
 
