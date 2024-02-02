@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { useGetSearchProducts } from "../hooks/api/useGetSearchProducts";
-import LoaderComparationPage from "../components/loaderComparationPage";
+import LoaderComparationPage from "../components/LoaderComparationPage";
 
 const SearchResultsPage = () => {
   const { squery } = useParams();
