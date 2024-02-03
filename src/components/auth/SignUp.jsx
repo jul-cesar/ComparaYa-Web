@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { auth } from "../../../firebase-auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
-import LogIn from "./LogIn";
+import React, { useContext, useState } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+import { Auth } from "../../context/authContext";
+
 const SignUp = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const { createUser } = useContext(Auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,15 +22,14 @@ const SignUp = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(
-      auth,
-      credentials.email,
-      credentials.password
-    )
-      .then((userCredentials) => console.log(userCredentials))
-      .catch((err) => console.log(err));
+    try {
+      await createUser(credentials.email, credentials.password);
+      navigate("/")
+    } catch (err) {
+      setError(err.message);
+    }
   };
   return (
     <div class="flex flex-col h-screen bg-gray-100">
@@ -81,6 +86,11 @@ const SignUp = () => {
               required
             />
 
+            <p class="block mt-2 text-sm font-semibold text-red-600 uppercase p-2">
+              {" "}
+              {error}{" "}
+            </p>
+
             <button
               type="submit"
               class="w-full py-3 mt-10 bg-gray-800 rounded-sm
@@ -92,7 +102,7 @@ const SignUp = () => {
 
             <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
               <Link to={"/login"} class="flex-2 underline">
-              <p>Iniciar sesion</p>
+                <p>Iniciar sesion</p>
               </Link>
             </div>
           </form>

@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../../../firebase-auth";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { Link, redirect } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { Auth } from "../../context/authContext";
 const LogIn = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const { logIn } = useContext(Auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,19 +20,20 @@ const LogIn = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
-      .then((userCredentials) => {
-        console.log(userCredentials);
-      })
-      .catch((err) => console.log(err.message));
+    try {
+      await logIn(credentials.email, credentials.password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      console.log(err.message);
+    }
   };
 
   return (
     <div class="flex flex-col h-screen bg-gray-100">
-      <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+      <div class="grid place-items-center mx-2 my-10 sm:my-auto">
         <div
           class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
                 px-6 py-10 sm:px-10 sm:py-6 
@@ -79,6 +85,11 @@ const LogIn = () => {
                         focus:text-gray-500 focus:outline-none focus:border-gray-200"
               required
             />
+
+            <p class="block mt-2 text-sm font-semibold text-red-600 uppercase p-2">
+              {" "}
+              {error}{" "}
+            </p>
 
             <button
               type="submit"

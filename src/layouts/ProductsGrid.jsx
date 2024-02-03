@@ -9,7 +9,7 @@ const ProductsGrid = ({ Items }) => {
 
   return (
     <>
-      <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-8 content-center">
+      <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-10 content-center">
         {!Items?.length < 1 ? (
           Items.map((product, index) => (
             <CardProduct

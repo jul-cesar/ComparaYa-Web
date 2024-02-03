@@ -5,9 +5,11 @@ import ProductsGrid from "../layouts/ProductsGrid";
 import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import Navbar from "../components/productsPage/Navbar";
-import CardProduct from "../components/productsPage/Product/CardProduct";
-import { nanoid } from "nanoid";
-import LoaderComparationPage from "../components/loaderComparationPage";
+import LoaderComparationPage from "../components/LoaderComparationPage";       
+import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
+
+
+
 
 const ComparationPage = () => {
   const { idf } = useParams();
@@ -56,6 +58,7 @@ const ComparationPage = () => {
   return (
     <>
       <Navbar />
+      
       <div className="p-3">
         <svg
           onClick={() => navigate(-1)}

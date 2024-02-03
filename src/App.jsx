@@ -9,30 +9,39 @@ import CategoriesPage from "./pages/CategoriesPage.jsx";
 import LogIn from "./components/auth/LogIn.jsx";
 import SignUp from "./components/auth/SignUp.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
-
-
+import { AuthFunction } from "./context/authContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (
-    <ProductsFunction>
-      <Toaster />
-      <div className="h-full w-full">
-        <SidebarFunction>
-          <Routes>
-            <Route path="/" element={<ProductsPage />} />
-            <Route
-              path="/product/comparation/:idf"
-              element={<ComparationPage />}
-            />
-            <Route path="/categories/:categ" element={<CategoriesPage />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/register" element={<SignUp />} />
-            <Route path="/search/:squery" element={<SearchResultsPage />} />
-          </Routes>
-        </SidebarFunction>
-      </div>
-      <Toaster richColors />
-    </ProductsFunction>
+    <AuthFunction>
+      <SidebarFunction>
+        <ProductsFunction>
+          <Toaster />
+          <div className="h-full w-full">
+            <Routes>
+              <Route path="/" element= {<ProtectedRoute> <ProductsPage /> </ProtectedRoute> } />
+              <Route
+                path="/product/comparation/:idf"
+                element={<ProtectedRoute> <ComparationPage /> </ProtectedRoute> }
+              />
+              <Route
+                path="/categories/:categ"
+                element={
+                  <ProtectedRoute>
+                    <CategoriesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/register" element={<SignUp />} />
+              <Route path="/search/:squery" element={<ProtectedRoute><SearchResultsPage /> </ProtectedRoute> } />
+            </Routes>
+          </div>
+          <Toaster richColors />
+        </ProductsFunction>
+      </SidebarFunction>
+    </AuthFunction>
   );
 }
 
