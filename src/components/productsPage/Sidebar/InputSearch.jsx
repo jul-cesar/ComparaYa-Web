@@ -11,6 +11,7 @@ const InputSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/search/${query}`);
+    window.scrollTo(0, 0);
   };
 
   return (

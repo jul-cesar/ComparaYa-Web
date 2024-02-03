@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductSkeleton = () => {
   return Array.from({ length: 50 }, (_, index) => (
-    <div className="flex min-h-full items-center justify-center p-4 mt-6" key={index}>
+    <div className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-10 content-center"key={index}>
       <div className="w-full">
         <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
           <div className="h-64 bg-gray-300"></div>

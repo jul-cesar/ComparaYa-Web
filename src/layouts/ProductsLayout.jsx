@@ -11,16 +11,7 @@ const ProductsLayout = ({ children, currentItems }) => {
     <div className="p-1 sm:p-5">
       <div className="flex items-center justify-center">
         <div className="flex-grow">
-          <div className="p-2 lg:ml-64">
-            {(!loadingProducts && !noResults) && (
-              <InfoHeader
-                currentCategory={currentCategory}
-                AllProducts={AllProducts}
-                currentItems={currentItems}
-              />
-            )}
-            {children}
-          </div>
+          <div className="p-2 mt-16 sm:mt-12 lg:ml-64">{children}</div>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Products } from "../../context/productsContext";
+import { ScrollToTop } from "../../utils/scrollTop";
 
-export const useGetSearchProducts = (query, page, limit) => {
+export const useGetSearchProducts = (query, page) => {
   const { filteredItems, setFilteredItems } = useContext(Products);
   const [searchResult, setSearchResult] = useState(false);
   const [noResult, setNoResult] = useState(false);
@@ -11,7 +12,7 @@ export const useGetSearchProducts = (query, page, limit) => {
     const BASE_API_URL =
       "https://api-compara-ya-git-main-jul-cesars-projects.vercel.app/productos/search";
     try {
-      const result = await fetch(`${BASE_API_URL}/${query}/${page}/${limit}`);
+      const result = await fetch(`${BASE_API_URL}/${query}/${page}/8`);
       const response = await result.json();
 
       setSearchResult(true);
@@ -20,22 +21,15 @@ export const useGetSearchProducts = (query, page, limit) => {
         setNoResult(true);
       } else {
         setNoResult(false);
-        setFilteredItems(response);
+        setFilteredItems((prevItems) => [...prevItems, ...response]);
       }
     } catch (error) {
       console.error("Failed to fetch products:", error);
-      setNoResult(true)
+      setNoResult(true);
     } finally {
       setSearchResult(true);
     }
   };
-
-  useEffect(() => {
-    const fetchCall = () => {
-      getSearchProds();
-    };
-    fetchCall();
-  }, [query, page, limit]); // Include query, page, and limit as dependencies
 
   return {
     searchResult,

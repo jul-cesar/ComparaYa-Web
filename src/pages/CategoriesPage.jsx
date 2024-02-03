@@ -8,42 +8,25 @@ import { useProductosCategory } from "../hooks/api/useProductosCategory";
 import { useGetCategory } from "../hooks/api/useGetCategory";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import { Products } from "../context/productsContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import LoaderComparationPage from "../components/LoaderComparationPage";
 
 const CategoriesPage = () => {
   const [curPage, setCurPage] = useState(1);
-  const [isFetching, setIsFetching] = useState(false);
-  const { isSearching } = useContext(Products);
-  console.log(isSearching);
+
   const { categ } = useParams();
   const { getCategory, category } = useGetCategory();
   const { productsCategory, fetchProductsByCategory, setProductsCategory } =
     useProductosCategory(category, curPage);
-  console.log(curPage);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleScroll = () => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-
-    if (scrollTop + clientHeight >= scrollHeight) {
-      setCurPage((prev) => prev + 1);
-    }
-  };
-
-  useEffect(() => {
-    if (isSearching) {
-      fetchProductsByCategory();
-    }
+    fetchProductsByCategory();
   }, [curPage]);
 
   useEffect(() => {
     const fetchData = async () => {
       await getCategory(categ);
     };
-
     fetchData();
   }, [categ]);
 
@@ -61,7 +44,24 @@ const CategoriesPage = () => {
       <CategoriesSidebar setCurrentItems={setProductsCategory} />
       <Carrito />
       <ProductsLayout currentItems={productsCategory.length}>
-        <ProductsGrid Items={productsCategory} />
+        <InfiniteScroll
+          loader={
+            <div className="flex justify-center items-center">
+              {" "}
+              <div
+                className="inline-block h-12 w-12 m-11 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              />
+            </div>
+          }
+          dataLength={productsCategory.length}
+          hasMore={curPage < productsCategory.length / 8}
+          next={() => {
+            setCurPage((prevPage) => prevPage + 1);
+          }}
+        >
+          <ProductsGrid Items={productsCategory} />
+        </InfiniteScroll>
       </ProductsLayout>
     </div>
   );
