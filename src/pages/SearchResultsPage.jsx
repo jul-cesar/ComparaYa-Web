@@ -63,7 +63,7 @@ const SearchResultsPage = () => {
         <Carrito />
         <InfiniteScroll
           endMessage={<p>End</p>}
-          hasMore={curPage < filteredItems.length / 8}
+          hasMore={true}
           dataLength={filteredItems.length}
           next={() => {
             setCurPage((prevPage) => prevPage + 1);
