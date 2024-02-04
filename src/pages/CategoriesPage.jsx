@@ -55,7 +55,7 @@ const CategoriesPage = () => {
             </div>
           }
           dataLength={productsCategory.length}
-          hasMore={curPage < productsCategory.length / 8}
+          hasMore={true}
           next={() => {
             setCurPage((prevPage) => prevPage + 1);
           }}

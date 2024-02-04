@@ -8,9 +8,7 @@ import ProductsLayout from "../layouts/ProductsLayout";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { SidebarContext } from "../context/sidebarContext";
 import { useProductosPaginados } from "../hooks/api/useProductosPaginados";
-import { Products } from "../context/productsContext";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,8 +19,6 @@ const ProductsPage = () => {
 
   const { setCurrentCategory, noResults, query, errorCats } =
     useContext(SidebarContext);
-
-  const { filteredItems, setFilteredItems } = useContext(Products);
 
   // const handleScroll = () => {
   //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -113,7 +109,8 @@ const ProductsPage = () => {
             setCurrentPage((prevPage) => prevPage + 1);
           }}
           dataLength={products.length}
-          hasMore={currentPage < products.length / 8}
+          hasMore={true}
+         
         >
           <ProductsGrid Items={products} />
         </InfiniteScroll>
