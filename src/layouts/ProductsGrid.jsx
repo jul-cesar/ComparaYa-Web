@@ -4,13 +4,13 @@ import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton"
 import { nanoid } from "nanoid";
 import { Products } from "../context/productsContext";
 
-const ProductsGrid = ({ Items }) => {
+const ProductsGrid = ({ Items, isLoading }) => {
   const { LoadingProducts } = useContext(Products);
 
   return (
     <>
       <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-10 content-center">
-        {!Items?.length < 1 ? (
+        {!isLoading ? (
           Items.map((product, index) => (
             <CardProduct
               product={product}

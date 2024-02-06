@@ -9,54 +9,33 @@ import ProductsGrid from "../layouts/ProductsGrid";
 import { SidebarContext } from "../context/sidebarContext";
 import { useProductosPaginados } from "../hooks/api/useProductosPaginados";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [isFetching, setIsFetching] = useState(false);
+  const { fetchProductosPaginados } = useProductosPaginados();
 
-  const { fetchProductosPaginados, products } = useProductosPaginados();
+  const { setCurrentCategory, query, errorCats } = useContext(SidebarContext);
 
-  const { setCurrentCategory, noResults, query, errorCats } =
-    useContext(SidebarContext);
-
-  // const handleScroll = () => {
-  //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-  //   const bottomThreshold = 700;
-
-  //   if (
-  //     scrollTop + clientHeight + bottomThreshold >= scrollHeight &&
-  //     !isFetching
-  //   ) {
-  //     setIsFetching(true);
-  //     setCurrentPage((prev) => prev + 1);
-  //   }
-  // };
-
-  useEffect(() => {
-    if (query === "") {
-      fetchProductosPaginados(currentPage).finally(() => setIsFetching(false));
-    }
-  }, [currentPage]);
+  const {
+    data,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["products", currentPage],
+    queryFn: async () => fetchProductosPaginados(currentPage),
+  });
 
   // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  //   fetchProductosPaginados(currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col  min-h-screen justify-center">
       <Navbar />
 
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
-
-      {errorCats && <ErrorModal message={"Error cats"} />}
-      {noResults && (
-        <ErrorModal
-          currentPage={currentPage}
-          message={`no se han encontrado resultados para "${query}"`}
-        />
-      )}
 
       <Carrito />
 
@@ -108,11 +87,10 @@ const ProductsPage = () => {
           next={() => {
             setCurrentPage((prevPage) => prevPage + 1);
           }}
-          dataLength={products.length}
+          dataLength={data ? data.length : 0}
           hasMore={true}
-         
         >
-          <ProductsGrid Items={products} />
+          <ProductsGrid Items={data} isLoading={isLoading} />
         </InfiniteScroll>
       </ProductsLayout>
     </div>
