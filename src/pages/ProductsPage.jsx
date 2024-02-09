@@ -1,15 +1,14 @@
 import React, { memo, useContext, useEffect, useState } from "react";
-
 import Navbar from "../components/productsPage/Navbar";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import Carrito from "../components/productsPage/Carrito/Carrito";
-import ErrorModal from "../components/ErrorModal";
 import ProductsLayout from "../layouts/ProductsLayout";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { SidebarContext } from "../context/sidebarContext";
 import { useProductosPaginados } from "../hooks/api/useProductosPaginados";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import InfiniteScrollLoader from "../components/InfiniteScrollLoader";
 
 const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,10 +21,20 @@ const ProductsPage = () => {
     data,
     error,
     isLoading,
-  } = useQuery({
+    hasNextPage,
+    fetchNextPage
+  } = useInfiniteQuery({
     queryKey: ["products", currentPage],
-    queryFn: async () => fetchProductosPaginados(currentPage),
+    queryFn: async ({ pageParam = 1 }) => fetchProductosPaginados(pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      } else {
+        return null; // No hay más páginas para buscar
+      }
+    }
   });
+  const products = data?.pages.reduce((prevProds, page) => prevProds.concat(page.results), [])
 
   // useEffect(() => {
   //   fetchProductosPaginados(currentPage);
@@ -41,59 +50,17 @@ const ProductsPage = () => {
 
       <ProductsLayout currentPage={currentPage} setCurrentPage={setCurrentPage}>
         <InfiniteScroll
-          loader={
-            <div className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-10 content-center mt-6">
-              <div className="w-full">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                  <div className="h-64 bg-gray-300"></div>
-                  <div className="px-6 py-4">
-                    <div className="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                    <div className="h-2 bg-gray-300 w-full mb-2"></div>
-                  </div>
-                  <div className="px-6 pt-4 pb-2">
-                    <div className="h-2 bg-gray-300 w-1/4 mb-2"></div>
-                    <div className="h-2 bg-gray-300 w-1/2"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                  <div className="h-64 bg-gray-300"></div>
-                  <div className="px-6 py-4">
-                    <div className="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                    <div className="h-2 bg-gray-300 w-full mb-2"></div>
-                  </div>
-                  <div className="px-6 pt-4 pb-2">
-                    <div className="h-2 bg-gray-300 w-1/4 mb-2"></div>
-                    <div className="h-2 bg-gray-300 w-1/2"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                  <div className="h-64 bg-gray-300"></div>
-                  <div className="px-6 py-4">
-                    <div className="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                    <div className="h-2 bg-gray-300 w-full mb-2"></div>
-                  </div>
-                  <div className="px-6 pt-4 pb-2">
-                    <div className="h-2 bg-gray-300 w-1/4 mb-2"></div>
-                    <div className="h-2 bg-gray-300 w-1/2"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
-          next={() => {
-            setCurrentPage((prevPage) => prevPage + 1);
-          }}
-          dataLength={data ? data.length : 0}
-          hasMore={true}
+
+          next={() => fetchNextPage()}
+
+          dataLength={products ? products.length : 0}
+          hasMore={hasNextPage | isLoading}
+          loader={<InfiniteScrollLoader />}
         >
-          <ProductsGrid Items={data} isLoading={isLoading} />
+          <ProductsGrid Items={products} isLoading={isLoading} />
         </InfiniteScroll>
       </ProductsLayout>
-    </div>
+    </div >
   );
 };
 
