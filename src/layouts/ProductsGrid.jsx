@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import CardProduct from "../components/productsPage/Product/CardProduct";
 import ProductSkeleton from "../components/productsPage/Product/ProductSkeleton";
 import { nanoid } from "nanoid";
-import { Products } from "../context/productsContext";
+
 
 const ProductsGrid = ({ Items, isLoading }) => {
-  const { LoadingProducts } = useContext(Products);
+
 
   return (
     <>
       <ul className="grid-cols-mobile grid sm:grid-cols-16 gap-3 sm:gap-10 content-center">
-        {!isLoading ? (
+        {(!isLoading && Array.isArray(Items) )? (
           Items.map((product, index) => (
             <CardProduct
               product={product}

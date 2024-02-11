@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Products } from "../context/productsContext";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { useProductos } from "../hooks/api/useProductos";

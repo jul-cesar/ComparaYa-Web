@@ -11,7 +11,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import InfiniteScrollLoader from "../components/InfiniteScrollLoader";
 
 const ProductsPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+
 
   const { fetchProductosPaginados } = useProductosPaginados();
 
@@ -24,7 +24,7 @@ const ProductsPage = () => {
     hasNextPage,
     fetchNextPage
   } = useInfiniteQuery({
-    queryKey: ["products", currentPage],
+    queryKey: ["products"],
     queryFn: async ({ pageParam = 1 }) => fetchProductosPaginados(pageParam),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
@@ -48,11 +48,9 @@ const ProductsPage = () => {
 
       <Carrito />
 
-      <ProductsLayout currentPage={currentPage} setCurrentPage={setCurrentPage}>
+      <ProductsLayout >
         <InfiniteScroll
-
           next={() => fetchNextPage()}
-
           dataLength={products ? products.length : 0}
           hasMore={hasNextPage | isLoading}
           loader={<InfiniteScrollLoader />}

@@ -7,7 +7,7 @@ import { useProductosPaginados } from "../../../hooks/api/useProductosPaginados"
 import { useProductosCategory } from "../../../hooks/api/useProductosCategory";
 import { Link } from "react-router-dom";
 
-const DropdownCategorias = ({ categories, setCurrentCategory }) => {
+const DropdownCategorias = ({ categories }) => {
   const [openCategories, setOpenCategories] = useState(false);
   const { setOpenSidebar } = useContext(SidebarContext);
   const { fetchProductsPaginados } = useProductosPaginados();
@@ -26,7 +26,7 @@ const DropdownCategorias = ({ categories, setCurrentCategory }) => {
           <li key={categorie.id}>
             <Link
               reloadDocument
-              to={`/categories/${categorie.nombre}`}
+              to={`/categories/${categorie.id}`}
               onClick={() => {
                 setOpenSidebar(false);
               }}

@@ -5,13 +5,14 @@ import { SidebarContext } from "../../../context/sidebarContext";
 import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
-  const { setQuery, query, noResults } = useContext(SidebarContext);
+  const { setQuery, query, noResults, setOpenSidebar } = useContext(SidebarContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/search/${query}`);
     window.scrollTo(0, 0);
+    setOpenSidebar(false)
   };
 
   return (

@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { useGetSearchProducts } from "../hooks/api/useGetSearchProducts";
-import LoaderComparationPage from "../components/LoaderComparationPage";
-import { SidebarContext } from "../context/sidebarContext";
 import Carrito from "../components/productsPage/Carrito/Carrito";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import Navbar from "../components/productsPage/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ScrollToTop } from "../utils/scrollTop";
 
 const SearchResultsPage = () => {
   const { squery } = useParams();

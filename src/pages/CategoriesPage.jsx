@@ -1,66 +1,53 @@
-import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/productsPage/Navbar";
 import ProductsLayout from "../layouts/ProductsLayout";
 import ProductsGrid from "../layouts/ProductsGrid";
 import Carrito from "../components/productsPage/Carrito/Carrito";
 import { useParams } from "react-router-dom";
 import { useProductosCategory } from "../hooks/api/useProductosCategory";
-import { useGetCategory } from "../hooks/api/useGetCategory";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
-import { Products } from "../context/productsContext";
 import InfiniteScroll from "react-infinite-scroll-component";
-import LoaderComparationPage from "../components/LoaderComparationPage";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import InfiniteScrollLoader from "../components/InfiniteScrollLoader";
 
 const CategoriesPage = () => {
-  const [curPage, setCurPage] = useState(1);
 
   const { categ } = useParams();
-  const { getCategory, category } = useGetCategory();
-  const { productsCategory, fetchProductsByCategory, setProductsCategory } =
-    useProductosCategory(category, curPage);
+  const { fetchProductsByCategory } =
+    useProductosCategory();
 
-  useEffect(() => {
-    fetchProductsByCategory();
-  }, [curPage]);
+  const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ["prodsCategories", categ],
+    queryFn: async ({ pageParam = 1 }) => fetchProductsByCategory(categ, pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      } else {
+        return null;
+      }
+    }
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getCategory(categ);
-    };
-    fetchData();
-  }, [categ]);
 
-  useEffect(() => {
-    const fetchCats = async () => {
-      await fetchProductsByCategory();
-    };
+  const productsCategory = data?.pages.reduce((prevProds, page) => prevProds.concat(page.results), [])
 
-    fetchCats();
-  }, [categ]);
 
   return (
     <div className="flex flex-col min-h-screen justify-center">
       <Navbar />
-      <CategoriesSidebar setCurrentItems={setProductsCategory} />
+      <CategoriesSidebar />
       <Carrito />
-      <ProductsLayout currentItems={productsCategory.length}>
+      <ProductsLayout >
         <InfiniteScroll
+          dataLength={productsCategory ? productsCategory.length : 0}
           loader={
-            <div className="flex justify-center items-center">
-              {" "}
-              <div
-                className="inline-block h-12 w-12 m-11 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status"
-              />
-            </div>
+            <InfiniteScrollLoader />
           }
-          dataLength={productsCategory.length}
-          hasMore={true}
-          next={() => {
-            setCurPage((prevPage) => prevPage + 1);
-          }}
+          hasMore={hasNextPage | isLoading}
+          next={() =>
+            fetchNextPage()
+          }
         >
-          <ProductsGrid Items={productsCategory} />
+          <ProductsGrid Items={productsCategory} isLoading={isLoading} />
         </InfiniteScroll>
       </ProductsLayout>
     </div>
