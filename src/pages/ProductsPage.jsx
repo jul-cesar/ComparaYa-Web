@@ -15,7 +15,7 @@ const ProductsPage = () => {
 
   const { fetchProductosPaginados } = useProductosPaginados();
 
-  const { setCurrentCategory, query, errorCats } = useContext(SidebarContext);
+  const { setCurrentCategory } = useContext(SidebarContext);
 
   const {
     data,
@@ -30,15 +30,12 @@ const ProductsPage = () => {
       if (lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
       } else {
-        return null; // No hay más páginas para buscar
+        return null;
       }
     }
   });
   const products = data?.pages.reduce((prevProds, page) => prevProds.concat(page.results), [])
 
-  // useEffect(() => {
-  //   fetchProductosPaginados(currentPage);
-  // }, [currentPage]);
 
   return (
     <div className="flex flex-col  min-h-screen justify-center">
@@ -52,7 +49,7 @@ const ProductsPage = () => {
         <InfiniteScroll
           next={() => fetchNextPage()}
           dataLength={products ? products.length : 0}
-          hasMore={hasNextPage | isLoading}
+          hasMore={hasNextPage || isLoading}
           loader={<InfiniteScrollLoader />}
         >
           <ProductsGrid Items={products} isLoading={isLoading} />

@@ -6,7 +6,7 @@ import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import Navbar from "../components/productsPage/Navbar";
 import LoaderComparationPage from "../components/LoaderComparationPage";
-import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
+
 
 const ComparationPage = () => {
   const { idf } = useParams();

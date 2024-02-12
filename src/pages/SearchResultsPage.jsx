@@ -6,35 +6,32 @@ import Carrito from "../components/productsPage/Carrito/Carrito";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import Navbar from "../components/productsPage/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import LoaderComparationPage from "../components/LoaderComparationPage";
+import Footer from "../components/productsPage/Footer";
 
 const SearchResultsPage = () => {
   const { squery } = useParams();
-  const navigate = useNavigate();
-  const [curPage, setCurPage] = useState(1);
 
-  const { filteredItems, getSearchProds } = useGetSearchProducts(
-    squery,
-    curPage
-  );
+  const { getSearchProds } = useGetSearchProducts();
 
-  useEffect(() => {
-    const f = async () => {
-      await getSearchProds();
-    };
-    f();
-  }, [curPage, squery]);
-
-  // if (noResult) {
-  //   return (
-  //     <div className="flex flex-col min-h-screen justify-center p-5">
-  //       <h1 className="text-center text-5xl">no res</h1>
-  //     </div>
-  //   );
-  // }
+  const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
+    queryKey: ["searchProducts", squery],
+    queryFn: async ({ pageParam = 1 }) => getSearchProds(squery,
+      pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      } else {
+        return null;
+      }
+    }
+  })
+  const filteredItems = data?.pages.reduce((prevProds, page) => prevProds.concat(page.results), [])
 
   return (
-    <div className="flex flex-col min-h-screen justify-center ">
-      <>
+    <div className="flex flex-col  min-h-screen justify-center">
+      <div className="flex flex-col  h-full justify-center">
         <a href="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,25 +56,16 @@ const SearchResultsPage = () => {
         </h1>
         <Carrito />
         <InfiniteScroll
-          endMessage={<p>End</p>}
-          hasMore={true}
-          dataLength={filteredItems.length}
-          next={() => {
-            setCurPage((prevPage) => prevPage + 1);
-          }}
-          loader={
-            <div className="flex justify-center items-center">
-              {" "}
-              <div
-                className="inline-block h-12 w-12 m-11 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status"
-              />
-            </div>
-          }
+          hasMore={hasNextPage || isLoading}
+          dataLength={filteredItems ? filteredItems.length : 0}
+          next={() => fetchNextPage()}
+         
         >
-          <ProductsGrid Items={filteredItems} />
+          <ProductsGrid Items={filteredItems} isLoading={isLoading} />
         </InfiniteScroll>
-      </>
+
+      </div>
+
     </div>
   );
 };

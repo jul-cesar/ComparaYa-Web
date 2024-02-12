@@ -3,15 +3,13 @@ import React, { useContext, useState } from "react";
 import OpenDropdownButton from "./OpenDropdownButton";
 
 import { SidebarContext } from "../../../context/sidebarContext";
-import { useProductosPaginados } from "../../../hooks/api/useProductosPaginados";
-import { useProductosCategory } from "../../../hooks/api/useProductosCategory";
+
 import { Link } from "react-router-dom";
 
 const DropdownCategorias = ({ categories }) => {
   const [openCategories, setOpenCategories] = useState(false);
   const { setOpenSidebar } = useContext(SidebarContext);
-  const { fetchProductsPaginados } = useProductosPaginados();
-  const { getProductsByCategory } = useProductosCategory();
+
   return (
     <>
       <OpenDropdownButton

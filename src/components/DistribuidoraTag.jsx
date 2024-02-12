@@ -2,7 +2,7 @@ import React from "react";
 
 const DistribuidoraTag = ({ precio_exito, precio_olim, precio_d1 }) => {
   return (
-    <div className="flex items-center mt-2 mb-2 sm:mt-3 sm:mb-5">
+    <div className="flex items-center m-2 sm:mt-3 sm:mb-5">
       {precio_exito > 0 && (
         <span className="bg-blue-100 text-yellow-500 text-xs sm:text-sm font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200">
           Exito
