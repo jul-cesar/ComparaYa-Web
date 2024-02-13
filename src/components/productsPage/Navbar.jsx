@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { SidebarContext } from "../../context/sidebarContext";
 import { Auth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { SheetDemo } from "../demo/SheetDemo";
 
 function Navbar() {
   const [openMenuProfile, setOpenMenuProfile] = useState(false);
@@ -65,8 +66,11 @@ function Navbar() {
             </a>
           </div>
           <div className="flex items-center">
+              <SheetDemo/>
             <div className="flex items-center ms-3">
+             
               <div>
+
                 <button
                   onClick={() => setOpenMenuProfile(!openMenuProfile)}
                   type="button"
@@ -83,9 +87,8 @@ function Navbar() {
                 </button>
               </div>
               <div
-                className={`absolute right-0 top-16 m-2 z-50 ${
-                  !openMenuProfile ? "hidden" : "block"
-                } text-base list-none bg-white divide-y divide-gray-100 rounded shadow`}
+                className={`absolute right-0 top-16 m-2 z-50 ${!openMenuProfile ? "hidden" : "block"
+                  } text-base list-none bg-white divide-y divide-gray-100 rounded shadow`}
                 id="dropdown-user"
               >
                 <div className="px-4 py-3" role="none">

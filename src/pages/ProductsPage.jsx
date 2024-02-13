@@ -38,7 +38,7 @@ const ProductsPage = () => {
 
 
   return (
-    <div className="flex flex-col  min-h-screen justify-center">
+    <div className="flex flex-col h-full min-h-screen justify-center">
       <Navbar />
 
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />

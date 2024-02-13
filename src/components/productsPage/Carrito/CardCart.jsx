@@ -42,9 +42,9 @@ const CardCart = ({
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="flex flex-row p-3 over   md:p-5 space-y-4">
-      <div className="rounded-lg md:w-screen">
-        <div className="justify-between items-center flex flex-col mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+    <div className="flex flex-col md:p-1 ">
+      <div className="rounded-lg w-full md:w-full">
+        <div className=" items-center flex flex-row mb-3 rounded-lg bg-white p-2 shadow-md sm:flex sm:justify-start">
           {!imgError ? (
             <img
               src={img}
@@ -52,7 +52,7 @@ const CardCart = ({
                 setImgError(true);
               }}
               alt="product-image"
-              className=" object-cover h-48 w-48 rounded-t-lg max-w-full align-middle italic bg-no-repeat bg-cover ms"
+              className=" object-cover mr-3 h-48 w-48 rounded-t-lg max-w-full align-middle italic bg-no-repeat bg-cover ms"
             />
           ) : (
             <Lottie
@@ -60,9 +60,9 @@ const CardCart = ({
               className="object-cover sm:h-52 sm:w-48 m-4 h-[140px] w-36 rounded-t-lg max-w-full mb-2"
             />
           )}
-          <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+          <div className="sm:ml-4  sm:w-full sm:justify-between">
             <div className="mt-5 sm:mt-0">
-              <h2 className="text-lg font-bold text-gray-900">{name}</h2>
+              <h2 className="text-base font-bold text-gray-900">{name}</h2>
               <DistribuidoraTag
                 precio_d1={precio_d1}
                 precio_exito={precio_exito}
