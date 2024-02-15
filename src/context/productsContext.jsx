@@ -7,6 +7,7 @@ export const ProductsFunction = ({ children }) => {
 
   const [ComparationItems, setComparationItems] = useState([]);
   const [AllProducts, setAllProducts] = useState([]);
+  const [currentCategoryId, setCurrentCategoryId] = useState();
 
   return (
     <Products.Provider
@@ -14,7 +15,9 @@ export const ProductsFunction = ({ children }) => {
         AllProducts,
         setAllProducts,
         setComparationItems,
-        ComparationItems
+        ComparationItems,
+        setCurrentCategoryId,
+        currentCategoryId
       }}
     >
       {children}

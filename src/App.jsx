@@ -11,6 +11,7 @@ import SignUp from "./components/auth/SignUp.jsx";
 import SearchResultsPage from "./pages/SearchResultsPage.jsx";
 import { AuthFunction } from "./context/authContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
               />
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/search/:squery" element={<ProtectedRoute><SearchResultsPage /> </ProtectedRoute> } />
+              <Route path="/search/" element={<ProtectedRoute><SearchResultsPage /> </ProtectedRoute> } />
+              <Route path="*" element={<NotFound/>}/>
             </Routes>
           </div>
           <Toaster richColors />

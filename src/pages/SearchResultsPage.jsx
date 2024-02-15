@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { useGetSearchProducts } from "../hooks/api/useGetSearchProducts";
 import Carrito from "../components/productsPage/Carrito/Carrito";
@@ -9,15 +9,18 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import LoaderComparationPage from "../components/LoaderComparationPage";
 import Footer from "../components/productsPage/Footer";
+import ProductsLayout from "@/layouts/ProductsLayout";
 
 const SearchResultsPage = () => {
   const { squery } = useParams();
-
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const querySearch = searchParams.get("search")
   const { getSearchProds } = useGetSearchProducts();
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["searchProducts", squery],
-    queryFn: async ({ pageParam = 1 }) => getSearchProds(squery,
+    queryKey: ["searchProducts", querySearch],
+    queryFn: async ({ pageParam = 1 }) => getSearchProds(querySearch,
       pageParam),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
@@ -51,17 +54,25 @@ const SearchResultsPage = () => {
 
         <Navbar />
         <CategoriesSidebar />
-        <h1 className="pt-7 m-4 text-xl sm:ml-[300px]">
-          RESULTADOS PARA: {squery.toUpperCase()}
-        </h1>
+
         <Carrito />
         <InfiniteScroll
           hasMore={hasNextPage || isLoading}
           dataLength={filteredItems ? filteredItems.length : 0}
+          loader={<div className="px-6 m-4 py-4 text-xl font-medium leading-none text-center bg-gray-700-200  animate-pulse">
+            Buscando...
+          </div>
+          }
           next={() => fetchNextPage()}
-         
+
         >
-          <ProductsGrid Items={filteredItems} isLoading={isLoading} />
+          <ProductsLayout>
+            <h1 className=" mb-6 text-xl ">
+              RESULTADOS PARA: {querySearch.toUpperCase()}
+            </h1>
+            <ProductsGrid Items={filteredItems} isLoading={isLoading} />
+          </ProductsLayout>
+
         </InfiniteScroll>
 
       </div>

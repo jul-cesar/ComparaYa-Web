@@ -6,7 +6,7 @@ import DropdownCategorias from "./DropdownCategorias";
 import { SidebarContext } from "../../../context/sidebarContext";
 import { useCategories } from "../../../hooks/api/useCategories";
 
-const CategoriesSidebar = () => {
+const CategoriesSidebar = React.memo(() => {
   const { setOpenCarrito, productsInCart, openSidebar } =
     useContext(SidebarContext);
   const { categories, getCategories } = useCategories();
@@ -39,7 +39,8 @@ const CategoriesSidebar = () => {
         </div>
       </aside>
     </>
-  );
-};
+  )
+}
+)
 
 export default CategoriesSidebar;

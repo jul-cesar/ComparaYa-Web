@@ -4,6 +4,7 @@ import {  SidebarContext } from "../../../context/sidebarContext";
 
 const Total = () => {
   const { productsInCart } = useContext(SidebarContext);
+  
   const montoTotalD1 = productsInCart.reduce(
     (total, item) => total + item.precio_d1 * item.quantity,
     0

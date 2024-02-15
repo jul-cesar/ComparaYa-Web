@@ -42,7 +42,7 @@ const CardCart = ({
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="flex flex-col md:p-1 ">
+    <div className="flex flex-col md:p-1 m-2 ">
       <div className="rounded-lg w-full md:w-full">
         <div className=" items-center flex flex-row mb-3 rounded-lg bg-white p-2 shadow-md sm:flex sm:justify-start">
           {!imgError ? (

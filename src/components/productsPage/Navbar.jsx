@@ -66,11 +66,9 @@ function Navbar() {
             </a>
           </div>
           <div className="flex items-center">
-              <SheetDemo/>
+            <SheetDemo />
             <div className="flex items-center ms-3">
-             
               <div>
-
                 <button
                   onClick={() => setOpenMenuProfile(!openMenuProfile)}
                   type="button"
@@ -147,7 +145,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default React.memo(Navbar);

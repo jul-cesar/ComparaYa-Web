@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import Navbar from "../components/productsPage/Navbar";
 import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSidebar";
 import Carrito from "../components/productsPage/Carrito/Carrito";
@@ -9,6 +9,7 @@ import { useProductosPaginados } from "../hooks/api/useProductosPaginados";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import InfiniteScrollLoader from "../components/InfiniteScrollLoader";
+import { ViewportList } from "react-viewport-list";
 
 const ProductsPage = () => {
 
@@ -38,7 +39,7 @@ const ProductsPage = () => {
 
 
   return (
-    <div className="flex flex-col h-full min-h-screen justify-center">
+    <div className="flex flex-col h-full min-h-screen justify-center" >
       <Navbar />
 
       <CategoriesSidebar setCurrentCategory={setCurrentCategory} />
@@ -49,12 +50,17 @@ const ProductsPage = () => {
         <InfiniteScroll
           next={() => fetchNextPage()}
           dataLength={products ? products.length : 0}
+          loader={<div>
+            <div className="px-3 py-4 text-xl font-medium leading-none text-center bg-gray-700-200  animate-pulse">
+              Buscando...
+            </div>
+          </div>}
           hasMore={hasNextPage || isLoading}
-          loader={<InfiniteScrollLoader />}
         >
           <ProductsGrid Items={products} isLoading={isLoading} />
         </InfiniteScroll>
       </ProductsLayout>
+
     </div >
   );
 };

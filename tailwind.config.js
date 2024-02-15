@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        '16': 'repeat(auto-fit, minmax(255px, auto))',
-        'mobile':  'repeat(auto-fit, minmax(150px, 2fr))',
+        '16': 'repeat(auto-fit, minmax(200px, auto))',
+        'mobile':  'repeat(auto-fit, minmax(155px, auto))',
       },
       colors: {
         border: "hsl(var(--border))",
