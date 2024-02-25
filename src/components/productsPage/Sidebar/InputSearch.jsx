@@ -10,7 +10,7 @@ const InputSearch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?search=${query}`);
+    navigate(`/search?q=${query}`);
     window.scrollTo(0, 0);
     setOpenSidebar(false)
   };

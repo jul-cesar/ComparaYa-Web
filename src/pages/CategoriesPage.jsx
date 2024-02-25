@@ -38,7 +38,7 @@ const CategoriesPage = () => {
 
   const productsCategory = data?.pages.reduce((prevProds, page) => prevProds.concat(page.results), [])
 
-  if (isError) return <h1>Categoria no encontrada</h1>
+
 
   return (
     <div className="flex flex-col min-h-screen justify-center">
@@ -48,7 +48,7 @@ const CategoriesPage = () => {
       <ProductsLayout >
         <InfiniteScroll
           dataLength={productsCategory ? productsCategory.length : 0}
-          hasMore={hasNextPage }
+          hasMore={hasNextPage}
           loader={<div>
             <div className="px-3 py-4 text-xl font-medium leading-none text-center bg-gray-700-200  animate-pulse">
               Buscando...

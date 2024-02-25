@@ -21,23 +21,23 @@ function App() {
           <Toaster />
           <div className="h-full w-full">
             <Routes>
-              <Route path="/" element= {<ProtectedRoute> <ProductsPage /> </ProtectedRoute> } />
+              <Route path="/" element={<ProductsPage />} />
               <Route
                 path="/product/comparation/:idf"
-                element={<ProtectedRoute> <ComparationPage /> </ProtectedRoute> }
+                element={<ComparationPage />}
               />
               <Route
                 path="/categories/:categ"
+
                 element={
-                  <ProtectedRoute>
-                    <CategoriesPage />
-                  </ProtectedRoute>
+                  <CategoriesPage />
                 }
+
               />
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/search/" element={<ProtectedRoute><SearchResultsPage /> </ProtectedRoute> } />
-              <Route path="*" element={<NotFound/>}/>
+              <Route path="/search/" element={<SearchResultsPage />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           <Toaster richColors />

@@ -6,12 +6,16 @@ import { useProductos } from "../hooks/api/useProductos";
 import { useComparations } from "../hooks/api/useComparations";
 import Navbar from "../components/productsPage/Navbar";
 import LoaderComparationPage from "../components/LoaderComparationPage";
+import { Auth } from "@/context/authContext";
+import AuthModal from "@/components/auth/AuthModal";
 
 
 const ComparationPage = () => {
   const { idf } = useParams();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { currentUser } = useContext(Auth);
+
 
   const { setComparationItems, ComparationItems, setAllProducts, AllProducts } =
     useContext(Products);
@@ -55,7 +59,7 @@ const ComparationPage = () => {
   return (
     <>
       <Navbar />
-
+    {!currentUser && <AuthModal/>}
       <div className="p-3">
         <svg
           onClick={() => navigate(-1)}

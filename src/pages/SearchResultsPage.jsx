@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import ProductsGrid from "../layouts/ProductsGrid";
 import { useGetSearchProducts } from "../hooks/api/useGetSearchProducts";
 import Carrito from "../components/productsPage/Carrito/Carrito";
@@ -7,15 +7,14 @@ import CategoriesSidebar from "../components/productsPage/Sidebar/CategoriesSide
 import Navbar from "../components/productsPage/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import LoaderComparationPage from "../components/LoaderComparationPage";
-import Footer from "../components/productsPage/Footer";
+
 import ProductsLayout from "@/layouts/ProductsLayout";
 
 const SearchResultsPage = () => {
-  const { squery } = useParams();
+
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const querySearch = searchParams.get("search")
+  const querySearch = searchParams.get("q")
   const { getSearchProds } = useGetSearchProducts();
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({

@@ -2,11 +2,14 @@ import React, { useContext, useState } from "react";
 
 import { SidebarContext } from "../../context/sidebarContext";
 import { Auth } from "../../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SheetDemo } from "../demo/SheetDemo";
+import { Button } from "../ui/button";
 
 function Navbar() {
   const [openMenuProfile, setOpenMenuProfile] = useState(false);
+
+  const location = useLocation()
 
   const { openSidebar, setOpenSidebar } = useContext(SidebarContext);
   const { logOut, currentUser } = useContext(Auth);
@@ -14,7 +17,8 @@ function Navbar() {
   const handleLogOut = async () => {
     try {
       await logOut();
-      navigate("/login");
+      setOpenMenuProfile(!openMenuProfile)
+      navigate(location.pathname);
       console.log("ur loggedout");
     } catch (err) {
       console.log(err.message);
@@ -66,10 +70,11 @@ function Navbar() {
             </a>
           </div>
           <div className="flex items-center">
-            <SheetDemo />
+            {!currentUser && <Link to={"/login"}><Button>Inicia Sesion</Button> </Link> }
+            {currentUser && <SheetDemo />}
             <div className="flex items-center ms-3">
               <div>
-                <button
+                {currentUser && <button
                   onClick={() => setOpenMenuProfile(!openMenuProfile)}
                   type="button"
                   className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
@@ -82,8 +87,9 @@ function Navbar() {
                     src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png"
                     alt="user photo"
                   />
-                </button>
+                </button>}
               </div>
+
               <div
                 className={`absolute right-0 top-16 m-2 z-50 ${!openMenuProfile ? "hidden" : "block"
                   } text-base list-none bg-white divide-y divide-gray-100 rounded shadow`}
@@ -97,7 +103,7 @@ function Navbar() {
                     className="text-sm font-medium text-gray-900 truncate"
                     role="none"
                   >
-                    {currentUser.email}
+                    {currentUser?.email}
                   </p>
                 </div>
                 <ul className="py-1" role="none">
